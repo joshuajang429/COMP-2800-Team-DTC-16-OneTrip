@@ -1,0 +1,206 @@
+/* One Trip */
+/* Log in page (no.1) */
+main{
+    position: absolute;
+    top: auto;
+    left: auto;
+    width: 450px;
+    height: 900px;
+    background-color: #DBF4FF;
+    border: 3px solid red;
+}
+
+#one {
+    position: absolute;
+    width: 326px;
+    height: 200px;
+    left: 72px;
+    margin-top: 0;
+    padding-top: 0%;
+    
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 144px;
+    line-height: 90%; /* or 130px */
+    
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    color: #FF5858;
+    
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
+                 0px 4px 4px rgba(0, 0, 0, 0.25), 
+                 0px 4px 4px rgba(0, 0, 0, 0.25), 
+                 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#trip {
+   position: absolute;
+    width: 326px;
+    height: 200px;
+    left: 72px;
+    margin-top: 110px;
+    
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 144px;
+    line-height: 90%; /* or 130px */
+    
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    color: #FFA34E;
+    
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
+                 0px 4px 4px rgba(0, 0, 0, 0.25), 
+                 0px 4px 4px rgba(0, 0, 0, 0.25), 
+                 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#catLogo {
+    position: absolute;
+    width: 234px;
+    height: 238px;
+    left: 100px;
+    top: 330px;
+}
+
+#idInput {
+    position: absolute;
+    width: 250px;
+    height: 65px;
+    left: 45px;
+    top: 600px;
+
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+}
+
+#id {
+    position: absolute;
+    width: 230px;
+    height: 54px;
+    left: 54px;
+    top: 620px;
+
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 48px;
+    text-align: center;
+    border: 0;
+
+    color: #D1C9C9;
+}
+
+#passwordInput {
+    position: absolute;
+    width: 250px;
+    height: 65px;
+    left: 45px;
+    top: 680px;
+
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+}
+
+#password {
+    position: absolute;
+    width: 230px;
+    height: 54px;
+    left: 54px;
+    top: 700px;
+
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 48px;
+    text-align: center;
+    border: 0;
+
+    color: #D1C9C9;
+}
+
+#goButton {
+    position: absolute;
+    width: 95px;
+    height: 142px;
+    left: 310px;
+    top: 617px;
+
+    background: #97FFC1;
+    border: 3px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
+                0px 4px 4px rgba(0, 0, 0, 0.25), 
+                0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 48px;
+    text-align: center;
+
+    color: #FFFFFF;
+
+
+}
+
+#signIn {
+    position: absolute;
+    width: 267px;
+    height: 43px;
+    left: 90px;
+    top: 780px;
+    
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 48px;
+    text-align: center;
+    
+    color: #32AEF4; 
+}
+
+#logo {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 370px;
+    top: 810px;
+}
+
+#team16 {
+    position: absolute;
+    width: 110px;
+    height: 19px;
+    left: 315px;
+    top: 860px;
+
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 19px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #010D79;
+}
+
