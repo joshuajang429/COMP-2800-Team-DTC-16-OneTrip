@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page View</title>
+    <title>Example Map</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">    
@@ -16,6 +16,7 @@
             font-family: 'Galindo', cursive;
             font-style: normal;
             font-weight: normal;
+            background-color: lightblue;
         }
         #red {
             color: red;
@@ -25,6 +26,40 @@
         }
         .title {
             font-size: 54px;
+        }
+
+        @media (max-width: 425px) {
+            #map {
+                margin-top: 15px;
+                text-align: center;
+            }
+            iframe {
+                width: 320px;
+                height: 320px;
+                border: none;
+            }
+        }
+        @media (min-width: 426px) and (max-width: 1023px) {
+            #map {
+                margin-top: 15px;
+                text-align: center;
+            }
+            iframe {
+                width: 600px;
+                height: 600px;
+                border: none;
+            }
+        }
+        @media (min-width: 1024px) {
+            #map {
+                margin-top: 15px;
+                text-align: center;
+            }
+            iframe {
+                width: 600px;
+                height: 500px;
+                border: none;
+            }
         }
     </style>
 </head>
@@ -64,4 +99,19 @@
             </ul>
         </div>
     </nav>
+
+    <div id="map">
+        <h2>Nearby Stores</h2>
+    </div>
+
+    <script>
+        const mapHolder = document.getElementById("map");
+        const map = document.createElement("iframe");
+
+        const apiKey = "AIzaSyBMN5A6BZM022m3zZ35SsgwJWlTW3SGL4g";
+        let src = `https://www.google.com/maps/embed/v1/search?key=${apiKey}&q=grocery+stores+near+me&zoom=15`
+        map.src = src
+
+        mapHolder.appendChild(map);
+    </script>
 </body>
