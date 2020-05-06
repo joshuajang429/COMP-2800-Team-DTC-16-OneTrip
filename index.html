@@ -6,29 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page View</title>
 
-    <link rel="stylesheet" href="webfontkit-20200430-064835/stylesheet.css" type="text/css" charset="utf-8" />
-    <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
+        body {
+            margin: 0;
+            font-family: 'Galindo', cursive;
+            font-style: normal;
+            font-weight: normal;
+        }
+        #red {
+            color: red;
+        }
+        #orange {
+            color: orange;
+        }
+        .title {
+            font-size: 54px;
+        }
+
         @media(max-width: 425px) {
-            body {
-                margin: 0;
-                font-family: "galindoregular";
-                font-style: normal;
-                font-weight: normal;
-            }
-            #red {
-                color: red;
-            }
-            #orange {
-                color: orange;
-            }
-            .title {
-                font-size: 54px;
-            }
             .intro {
                 background-color: lightblue;
                 margin: 0px;
@@ -48,21 +48,6 @@
         }
 
         @media(min-width: 426px) and (max-width: 1023px) {
-            body {
-                margin: 0;
-                font-family: "galindoregular";
-                font-style: normal;
-                font-weight: normal;
-            }
-            #red {
-                color: red;
-            }
-            #orange {
-                color: orange;
-            }
-            .title {
-                font-size: 54px;
-            }
             .intro {
                 background-color: lightblue;
                 margin: 0px;
@@ -83,21 +68,6 @@
         }
 
         @media(min-width: 1024px) {
-            body {
-                margin: 0;
-                font-family: "galindoregular";
-                font-style: normal;
-                font-weight: normal;
-            }
-            #red {
-                color: red;
-            }
-            #orange {
-                color: orange;
-            }
-            .title {
-                font-size: 54px;
-            }
             .intro {
                 background-color: lightblue;
                 margin: 0px;
@@ -172,7 +142,7 @@
                     <span class="title" id="red">One</span> <span class="title" id="orange">Trip</span>
                     <br>
                     <img id="logo" src="assets/onetrip_logo_large.png">
-                    <a href="map_sample.html"><h1>Get Started!</h1></a>
+                    <a href="example_map.html"><h1>Get Started!</h1></a>
                 </div>
             </div>
         </div>
