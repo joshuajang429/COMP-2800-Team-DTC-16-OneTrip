@@ -1,5 +1,5 @@
 /* One Trip */
-/* Map (no.4) */
+/* Waiting Time (no.5) */
 main{
     position: absolute;
     top: auto;
@@ -49,45 +49,34 @@ main{
     top: 48px;
 }
 
-#map {
-    position: absolute;
-    width: 375px;
-    height: 375px;
-    left: 33px;
-    top: 163px;
-    border: 3px solid red;    
-}
-
-#marketList {
+#marketButton {
     position: absolute;
     width: 336px;
-    height: 43px;
-    left: 18px;
-    top: -100px;
+    height: 65px;
+    left: 55px;
+    top: 160px;
+
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    box-sizing: border-box;
+    border-radius: 16px;
 
     font-family: Exo;
     font-style: normal;
     font-weight: bold;
-    font-size: 48px;
-    line-height: 64px;
+    font-size: 36px;
+    line-height: 48px;
     text-align: center;
-    list-style-type: none;
 
     color: #2377A6;
 }
 
-#marketListButton1 {
+#instruction {
     position: absolute;
-    width: 336px;
-    height: 65px;
-    left: 39px;
-    top: 665px;
-
-    background: #FFFFFF;
-    border: 3px solid #000000;
-    box-sizing: border-box;
-    border-radius: 16px;
-    z-index: 1;
+    width: 300px;
+    height: 126px;
+    left: 70px;
+    top: 230px;
 
     font-family: Exo;
     font-style: normal;
@@ -99,18 +88,51 @@ main{
     color: #F85C2A;
 }
 
-#marketListButton2 {
+#speechBubble {
     position: absolute;
-    width: 336px;
-    height: 65px;
-    left: 39px;
-    top: 765px;
+    width: 280px;
+    height: 200px;
+    left: 60px;
+    top: 310px;
+}
 
-    background: #FFFFFF;
-    border: 3px solid #000000;
-    box-sizing: border-box;
+#waitingTime {
+    position: absolute;
+    width: 175px;
+    height: 100px;
+    left: 110px;
+    top: 270px;
+
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 55px;
+    line-height: 65px;
+    text-align: center;
+
+    color: #F85C2A;
+}
+
+#catLogo {
+    position: absolute;
+    width: 234px;
+    height: 238px;
+    left: 135px;
+    top: 500px;
+
+    background: url(iconfinder_cat_cart_185522.png);
+}
+
+#updateButton {
+    position: absolute;
+    width: 219px;
+    height: 65px;
+    left: 120px;
+    top: 788px;
+
+    background: #97FFC1;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 16px;
-    z-index: 1;
 
     font-family: Exo;
     font-style: normal;
@@ -119,5 +141,5 @@ main{
     line-height: 48px;
     text-align: center;
 
-    color: #F85C2A;
+    color: #FFFFFF;
 }

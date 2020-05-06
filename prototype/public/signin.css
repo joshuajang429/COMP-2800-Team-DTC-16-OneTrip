@@ -80,22 +80,14 @@ main{
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 16px;
-}
 
-#name {
-    position: absolute;
-    width: 240px;
-    height: 55px;
-    left: 105px;
-    top: 320px;
-    
     font-family: Exo;
     font-style: normal;
     font-weight: bold;
     font-size: 50px;
     line-height: 48px;
     text-align: center;
-    border: 0;
+
     color: #D1C9C9; 
 }
 
@@ -111,22 +103,14 @@ main{
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 16px;    
-}
 
-#id {
-    position: absolute;
-    width: 240px;
-    height: 55px;
-    left: 105px;
-    top: 420px;
-    
     font-family: Exo;
     font-style: normal;
     font-weight: bold;
     font-size: 50px;
     line-height: 48px;
     text-align: center;
-    border: 0;
+
     color: #D1C9C9;   
 }
 
@@ -142,14 +126,6 @@ main{
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 16px;
-}
-
-#password {
-    position: absolute;
-    width: 240px;
-    height: 55px;
-    left: 105px;
-    top: 520px;
     
     font-family: Exo;
     font-style: normal;
@@ -157,7 +133,7 @@ main{
     font-size: 36px;
     line-height: 48px;
     text-align: center;
-    border: 0;
+
     color: #D1C9C9;    
 }
 
@@ -173,22 +149,14 @@ main{
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 16px;    
-}
 
-#email {
-    position: absolute;
-    width: 240px;
-    height: 55px;
-    left: 105px;
-    top: 620px;
-    
     font-family: Exo;
     font-style: normal;
     font-weight: bold;
     font-size: 31px;
     line-height: 45px;
     text-align: center;
-    border: 0;
+
     color: #D1C9C9;       
 }
 

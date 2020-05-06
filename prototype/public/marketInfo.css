@@ -1,5 +1,5 @@
 /* One Trip */
-/* Map (no.4) */
+/* Market Info (no.7) */
 main{
     position: absolute;
     top: auto;
@@ -49,74 +49,139 @@ main{
     top: 48px;
 }
 
-#map {
-    position: absolute;
-    width: 375px;
-    height: 375px;
-    left: 33px;
-    top: 163px;
-    border: 3px solid red;    
-}
-
-#marketList {
+#marketButton {
     position: absolute;
     width: 336px;
-    height: 43px;
-    left: 18px;
-    top: -100px;
+    height: 65px;
+    left: 55px;
+    top: 160px;
+
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    box-sizing: border-box;
+    border-radius: 16px;
 
     font-family: Exo;
     font-style: normal;
     font-weight: bold;
-    font-size: 48px;
-    line-height: 64px;
+    font-size: 36px;
+    line-height: 48px;
     text-align: center;
-    list-style-type: none;
+
+    color: #2377A6;
+}
+#openClose {
+    position: absolute;
+    width: 301px;
+    height: 44px;
+    left: 75px;
+    top: 240px;
+
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 48px;
+    text-align: center;
 
     color: #2377A6;
 }
 
-#marketListButton1 {
+#openCloseTime {
     position: absolute;
     width: 336px;
     height: 65px;
-    left: 39px;
-    top: 665px;
+    left: 55px;
+    top: 300px;
 
     background: #FFFFFF;
     border: 3px solid #000000;
     box-sizing: border-box;
     border-radius: 16px;
-    z-index: 1;
 
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 60px;
+    text-align: center;
+    
+    color: #F85C2A;     
+}
+
+#senior {
+    position: absolute;
+    width: 301px;
+    height: 44px;
+    left: 80px;
+    top: 400px;
+    
     font-family: Exo;
     font-style: normal;
     font-weight: bold;
     font-size: 36px;
     line-height: 48px;
     text-align: center;
-
-    color: #F85C2A;
+    
+    color: #2377A6;    
 }
 
-#marketListButton2 {
+#seniorTime {
     position: absolute;
     width: 336px;
     height: 65px;
-    left: 39px;
-    top: 765px;
+    left: 55px;
+    top: 460px;
 
     background: #FFFFFF;
     border: 3px solid #000000;
     box-sizing: border-box;
     border-radius: 16px;
-    z-index: 1;
+    
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height:60px;
+    text-align: center;
+    
+    color: #F85C2A;     
+}
 
+#tel {
+    position: absolute;
+    width: 301px;
+    height: 44px;
+    left: 80px;
+    top: 560px;
+    
     font-family: Exo;
     font-style: normal;
     font-weight: bold;
     font-size: 36px;
     line-height: 48px;
+    text-align: center;
+    
+    color: #2377A6;    
+}
+
+#telNumber {
+    position: absolute;
+    width: 336px;
+    height: 65px;
+    left: 55px;
+    top: 620px;
+
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    box-sizing: border-box;
+    border-radius: 16px;
+
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 60px;
     text-align: center;
 
     color: #F85C2A;
