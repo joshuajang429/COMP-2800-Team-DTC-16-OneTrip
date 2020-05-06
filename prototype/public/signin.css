@@ -1,0 +1,216 @@
+/* One Trip */
+/* Sign in page (no.2) */
+main{
+    position: absolute;
+    top: auto;
+    left: auto;
+    width: 450px;
+    height: 900px;
+    background-color: #DBF4FF;
+    border: 3px solid red;
+}
+
+#goBack {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    left: 15px;
+    top: 30px;
+}
+
+#signWith {
+    position: absolute;
+    width: 300px;
+    height: 43px;
+    left: 75px;
+    top: 40px;
+
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 64px;
+    text-align: center;
+
+    color: #2377A6;
+}
+
+#googleImg {
+    position: absolute;
+    width: 93px;
+    height: 93px;
+    left: 88px;
+    top: 174px;
+}
+
+#facebookImg {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    left: 265px;
+    top: 177px;
+}
+
+#or {
+    position: absolute;
+    width: 123px;
+    height: 43px;
+    left: 160px;
+    top: 140px;
+
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 64px;
+    text-align: center;
+
+    color: #2377A6;
+}
+
+#nameInput {
+    position: absolute;
+    width: 270px;
+    height: 65px;
+    left: 89px;
+    top: 300px;
+
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+}
+
+#name {
+    position: absolute;
+    width: 240px;
+    height: 55px;
+    left: 105px;
+    top: 320px;
+    
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 48px;
+    text-align: center;
+    border: 0;
+    color: #D1C9C9; 
+}
+
+#idInput {
+    position: absolute;
+    width: 270px;
+    height: 65px;
+    left: 89px;
+    top: 400px;
+    
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;    
+}
+
+#id {
+    position: absolute;
+    width: 240px;
+    height: 55px;
+    left: 105px;
+    top: 420px;
+    
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 48px;
+    text-align: center;
+    border: 0;
+    color: #D1C9C9;   
+}
+
+#passwordInput {
+    position: absolute;
+    width: 270px;
+    height: 65px;
+    left: 89px;
+    top: 500px;
+
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+}
+
+#password {
+    position: absolute;
+    width: 240px;
+    height: 55px;
+    left: 105px;
+    top: 520px;
+    
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 48px;
+    text-align: center;
+    border: 0;
+    color: #D1C9C9;    
+}
+
+#emailInput {
+    position: absolute;
+    width: 270px;
+    height: 65px;
+    left: 89px;
+    top: 600px;
+    
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;    
+}
+
+#email {
+    position: absolute;
+    width: 240px;
+    height: 55px;
+    left: 105px;
+    top: 620px;
+    
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 31px;
+    line-height: 45px;
+    text-align: center;
+    border: 0;
+    color: #D1C9C9;       
+}
+
+#confirmButton {
+    position: absolute;
+    width: 270px;
+    height: 65px;
+    left: 89px;
+    top: 720px;
+    
+    background: #97FFC1;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
+                0px 4px 4px rgba(0, 0, 0, 0.25), 
+                0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;   
+
+    font-family: Exo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 48px;
+    text-align: center;
+
+    color: #FFFFFF; 
+}
