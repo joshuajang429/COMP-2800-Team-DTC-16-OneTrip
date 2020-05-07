@@ -1,4 +1,15 @@
-INSERT INTO stores (store_name, phone, store_address, opening_time, closing_time, senior_time_start, senior_time_end)
+INSERT INTO stores (store_name, phone, store_address, store_post_code, store_city)
 VALUES 
-("Walmart", "7783281120", "4545 Central Blvd, Burnaby BC V5H4J5", "08:00", "19:00", NULL, NULL),
-("Superstore", "6045325427", "19851 Willowbrook Dr, Langley City, BC V2Y 1A7", "08:00", "22:00", "08:00", "09:00");
+("Walmart", "7783281120", "4545 Central Blvd", "V5H4J5", "Burnaby"),
+("Superstore", "6045325427", "19851 Willowbrook Dr", "V2Y1A7", "Langley");
+
+
+INSERT INTO wait_times (user_id, store_id, wait_times, time_stamp)
+VALUES
+(1, 1, 25, '2020-04-20 12:00:00'),
+(1, 2, 15, '2020-04-08 12:00:00'),
+
+
+
+
+
