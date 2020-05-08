@@ -37,7 +37,7 @@ CREATE TABLE wait_times (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     user_id INTEGER NOT NULL,
     store_id INTEGER NOT NULL,
-    created DATETIME NOT NULL DEFAULT NOW(),
+    created TIMESTAMP NOT NULL DEFAULT NOW(),
     wait_time INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (store_id) REFERENCES stores (id)

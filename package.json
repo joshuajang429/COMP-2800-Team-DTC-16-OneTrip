@@ -18,6 +18,7 @@
   "homepage": "https://github.com/joshuajang429/COMP-2800-Team-DTC-16-OneTrip#readme",
   "dependencies": {
     "ejs": "^3.1.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0"
   }
 }

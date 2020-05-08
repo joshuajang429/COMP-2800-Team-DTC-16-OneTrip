@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +9,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
+        /* @import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap'); */
         body {
             margin: 0;
             font-family: 'Galindo', cursive;
             font-style: normal;
             font-weight: normal;
             background-color: lightblue;
-            text-align: center;
         }
         #red {
             color: red;
@@ -28,7 +26,22 @@
         .title {
             font-size: 54px;
         }
-
+        main {
+            text-align: center;
+        }
+        button.stores {
+            width: 300px;
+            background-color: white;
+            border: 3px solid black;
+            border-radius: 10px;
+            color: #F85C2A;
+        }
+        div.data {
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-row-gap: 10px;
+        }
         @media (max-width: 425px) {
             #map {
                 margin-top: 15px;
@@ -100,26 +113,30 @@
             </ul>
         </div>
     </nav>
-
-    <h2>Nearby Stores</h2>
-    <div class="container">
-        <div class="row">
-            <form class="pure-form col-lg">
-                <input type="text" id="search" placeholder="Enter a store name">
+    <main>
+        <div class="title-form-block">
+            <h2>Nearby Stores</h2>
+            <form class="pure-form" action="/marketlist.ejs" method="post">
+                <input type="text" id="search" placeholder="Enter a store name" name="storename">
                 <button type="submit">Search!</button>
-                
-                <div id="results">
-                    
-                </div>
             </form>
-            
-            <div class="col-lg" id="map"></div>
-            
         </div>
-        
-    </div>
-    <a href="marketlist.ejs">View wait times</a>
-    <script src="script/map.js"></script>
-    
+        <div class="data">
+            <% if (result !== null) { %>
+                <% for (var item of result) { %>
+                    <div class="store-button">
+                        <button class="stores" id='<%= item.id %>' onclick=redirect(id)>
+                            <h4><%= item.store_name %>, <%= item.store_city%></h4>
+                            <h5>Wait: <%= item.wait_time %> min</h5>
+                        </button>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+    </main>
+    <script>
+        function redirect(id) {
+            window.location.replace(`http://localhost:3000/storepage.ejs?storeid=${id}`);
+        }
+    </script>
 </body>
-</html>
