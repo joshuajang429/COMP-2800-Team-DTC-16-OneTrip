@@ -1,5 +1,8 @@
 const express = require("express");
+const app = express();
 const mysql = require("mysql2");
+const path = require("path");
+const PORT = process.env.PORT || 3000;
 
 const db = mysql.createPool({
     host: 'sql3.freemysqlhosting.net',
@@ -8,15 +11,13 @@ const db = mysql.createPool({
     password: 'tmVZZgLzY1'
 }).promise();
 
-const app = express();
-    app.use(express.urlencoded({extended: true}));
-    app.use(express.static("public"));
-    app.set("view engine", "ejs");
-
-var PORT = process.env.PORT || 3000;
-
+app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
-app.listen(3000, () => console.log("listening at 3000!"));
+app.use(express.static("public"));
+
+// EJS Middleware
+app.set("views", path.join(__dirname, "views/"))
+app.set("view engine", "ejs");
 
 //------Routing------//
 
@@ -62,5 +63,8 @@ app.post("/marketlist.ejs", (req, res) => {
         res.render("pages/marketlist", {result: Data});
     }).
     catch(error => console.log(error))
-    
 })
+
+app.listen(PORT, () => {
+    console.log(`listening on ${PORT}`)
+});

@@ -33,27 +33,3 @@ document.querySelector('form.pure-form').addEventListener('submit', function (e)
 
     console.log(search.value);
 })
-
-// function initMap() {
-//     // The Current Location
-
-//     if ('geolocation' in navigator) {
-//         navigator.geolocation.getCurrentPosition(async position => {
-//             lng = position.coords.longitude;
-
-//             // The map, centered at Current location
-//             var map = new google.maps.Map(document.getElementById('map'), {
-//                 zoom: 15, 
-//                 center: {lat: position.coords.latitude, lng: position.coords.longitude}
-//             });
-//             // The marker, positioned at Uluru
-//             var marker = new google.maps.Marker({
-//                 position: {
-//                     lat: position.coords.latitude, 
-//                     lng: position.coords.longitude
-//                 }, 
-//                 map: map
-//             });
-//         })
-//     }
-// }
