@@ -1,0 +1,25 @@
+{
+  "name": "comp-2800-team-dtc-16-onetrip",
+  "version": "1.0.0",
+  "description": "- Marlon Fajardo - Term 2\r   - Diyar Ravandi - Term 2\r   - Junhyeok Jang (Joshua) - Term 1\r   - Hyungjoon Lee - Term 1 (branch name : hyungjoon)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuajang429/COMP-2800-Team-DTC-16-OneTrip.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshuajang429/COMP-2800-Team-DTC-16-OneTrip/issues"
+  },
+  "homepage": "https://github.com/joshuajang429/COMP-2800-Team-DTC-16-OneTrip#readme",
+  "dependencies": {
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "path": "^0.12.7"
+  }
+}

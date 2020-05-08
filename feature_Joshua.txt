@@ -1,1 +1,8 @@
 This is Joshua's feature branch.
+
+Week 1:
+    I have implemented features on the landing page, including anchor tags linked to sign-in and sign-out pages.
+
+Week 2:
+    - Fully responsive landing page.
+    - Converted project files (htmls) into web application (using node.js, express, and ejs)
