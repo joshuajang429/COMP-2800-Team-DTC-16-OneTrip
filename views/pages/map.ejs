@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example Map</title>
+    <title>Near By Stores</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">    
@@ -109,7 +109,7 @@
                 <button type="submit">Search!</button>
                 
                 <div id="results">
-                    
+                    <a href="marketlist.ejs">View wait times</a>
                 </div>
             </form>
             
@@ -118,8 +118,44 @@
         </div>
         
     </div>
-    <a href="marketlist.ejs">View wait times</a>
-    <script src="script/map.js"></script>
-    
+    <script>
+
+        // ----------------- GEOLOCATION + GOOGLE MAPS ----------------------- //
+        let map = document.createElement('iframe');
+        let mapHolder = document.getElementById('map');
+        let key = "AIzaSyBMN5A6BZM022m3zZ35SsgwJWlTW3SGL4g"
+
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(async position => {
+
+                let current_lat = position.coords.latitude;
+                let current_lng = position.coords.longitude;
+
+                map.src = `https://www.google.com/maps/embed/v1/search?key=${key}
+                &q=stores+near+me&center=${current_lat},${current_lng}&zoom=15`
+                mapHolder.appendChild(map);
+            });
+        }
+
+        let search = document.getElementById('search');
+
+        document.querySelector('form.pure-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(async position => {
+            
+                    let current_lat = position.coords.latitude;
+                    let current_lng = position.coords.longitude;
+            
+                    map.src = `https://www.google.com/maps/embed/v1/search?key=${key}
+                    &q=${search.value}+near+me&center=${current_lat},${current_lng}&zoom=14`
+                    mapHolder.appendChild(map);
+                });
+            }
+
+            console.log(search.value);
+        })
+    </script>
 </body>
 </html>
