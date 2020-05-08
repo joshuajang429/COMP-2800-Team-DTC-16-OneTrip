@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="update.css">
+    <title>Map</title>
+
+</head>
+
+<body>
+    <main>
+
+        <!-- Go Back -->
+        <div>
+            <a href="/waitingtime">
+            <img src="img/goBack.png" id="goBack">
+            </a>
+        </div>
+
+
+        <!-- Log out -->
+        <div id="logOut">
+            <a href="/">
+                <p id=logoutButton>Log Out</p>
+            </a>
+        </div>
+
+
+        <!-- User Icon -->
+        <img src="img/userIcon.png" id="userIcon">
+
+
+        <!-- Market Name -->
+        <!-- Need to Change After API Implemented-->
+        <a href="/marketinfo">
+            <button type="submit" id="marketButton">IGA, Burrad st</button>
+        </a>
+
+
+        <!-- Instruction -->
+        <p id="instruction">How long did you wait to get in? <br>(ex 1, 16, or 280)</p>
+
+
+        <!-- Time Input -->
+        <!-- Need to Change After Calculation Implemented-->
+        <!-- <form action="/waitingtime" method="post"> -->
+
+            <input id="minute" type="text" name="minute" onfocus="this.value=''" value="MINUTE">
+            
+            <a href="/waitingtime">
+                <button type="submit" id="confirmButton">CONFIRM</button>
+            </a>
+        </form>
+    </main>
+</body>
+</html>
