@@ -2,10 +2,16 @@
     --input-padding-x: 1.5rem;
     --input-padding-y: .75rem;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
   
 body {
     background: #007bff;
     background: linear-gradient(to right, #0062E6, #33AEFF);
+    margin: 0;
+    font-family: 'Galindo', cursive;
+    font-style: normal;
+    font-weight: normal;
 }
   
 .card-signin {

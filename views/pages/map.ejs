@@ -17,6 +17,7 @@
             font-style: normal;
             font-weight: normal;
             background-color: lightblue;
+            text-align: center;
         }
         #red {
             color: red;
@@ -101,52 +102,23 @@
     </nav>
 
     <h2>Nearby Stores</h2>
-    <form class="pure-form">
-        <input type="text" id="search" placeholder="Enter a store name">
-        <button type="submit">Search!</button>
-    </form>
-    
-    <div id="map">
+    <div class="container">
+        <div class="row">
+            <form class="pure-form col-lg">
+                <input type="text" id="search" placeholder="Enter a store name">
+                <button type="submit">Search!</button>
+
+                <div id="results">
+                    
+                </div>
+            </form>
+
+            <div class="col-lg" id="map"></div>
+        </div>
         
     </div>
-
-    <script>
-        const mapHolder = document.getElementById("map");
-        const map = document.createElement("iframe");
-
-        const apiKey = "AIzaSyBMN5A6BZM022m3zZ35SsgwJWlTW3SGL4g";
-
-        function success(pos) {
-            let crd = pos.coords;
-            let src = `https://www.google.com/maps/embed/v1/search?key=${apiKey}&q=near+me&zoom=13&center=${crd.latitude},${crd.longitude}`
-            map.src = src
-
-            mapHolder.appendChild(map);
-        };
-
-        navigator.geolocation.getCurrentPosition(success, options => {
-            enableHighAccuracy = true,
-            timeout = 5000
-        });
-
-
-        var search = document.getElementById('search');
-
-        document.querySelector('form.pure-form').addEventListener('submit', function (e) {
-            //prevent the normal submission of the form
-            e.preventDefault();
-            
-            function success(pos) {
-                let crd = pos.coords;
-                map.src = `https://www.google.com/maps/embed/v1/search?key=${apiKey}&q=${search.value}near+me&zoom=13&center=${crd.latitude},${crd.longitude}`
-
-                mapHolder.appendChild(map);
-            };
-
-            navigator.geolocation.getCurrentPosition(success, options => {
-                enableHighAccuracy = true,
-                timeout = 5000
-            });
-        });
-    </script>
+    
+    <script src="script/map.js"></script>
+    
 </body>
+</html>
