@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
+        
+body {
+    margin: 0;
+    font-family: 'Galindo', cursive;
+    font-style: normal;
+    font-weight: normal;
+}
+#red {
+    color: red;
+}
+#orange {
+    color: orange;
+}
+.title {
+    font-size: 54px;
+}
+
+@media(max-width: 425px) {
+    .intro {
+        background-color: lightblue;
+        margin: 0px;
+    }
+    .goals_features {
+        background-color: aquamarine;
+        padding-top: 40px;
+    }
+    .about {
+        background-color: skyblue;
+        padding-top: 40px;
+        text-align: center;
+    }
+    #member-intro {
+        margin-bottom: 50px;
+    }
+}
+
+@media(min-width: 426px) and (max-width: 1023px) {
+    .intro {
+        background-color: lightblue;
+        margin: 0px;
+        padding-bottom: 70px
+    }
+    .goals_features {
+        background-color: aquamarine;
+        padding-top: 40px;
+    }
+    .about {
+        background-color: skyblue;
+        padding-top: 40px;
+        text-align: center;
+    }
+    #member-intro {
+        margin-bottom: 50px;
+    }
+}
+
+@media(min-width: 1024px) {
+    .intro {
+        background-color: lightblue;
+        margin: 0px;
+        padding-bottom: 70px
+    }
+    .goals_features {
+        background-color: aquamarine;
+        padding-top: 40px;
+    }
+    .about {
+        background-color: skyblue;
+        padding-top: 40px;
+        text-align: center;
+    }
+    #member-intro {
+        margin-bottom: 50px;
+    }
+}
