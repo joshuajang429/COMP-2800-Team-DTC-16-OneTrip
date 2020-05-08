@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <style>
-        /* @import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap'); */
+        @import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
         body {
             margin: 0;
             font-family: 'Galindo', cursive;
@@ -118,16 +118,37 @@
         </div>
     </nav>
     <main>
-        <div class="data">
+        <div class="data"></div>
             <a href="marketlist.ejs">Return to market list</a>
-            <h2><%= storeData.store_name %>, <%= storeData.store_city%></h2>
-            <p>Address: <%= storeData.store_address %></p>
+            <h2 id="store"><%= storeData.store_name %>, <%= storeData.store_city%></h2>
+            <p id="address">Address: <%= storeData.store_address %></p>
             <p>Phone: <%= storeData.phone %></p>
             <h4>Latest wait time: <%= storeData.wait_time %> min</h4>
         </div>
+
+        <div id="map"></div>
         <button>Update time</button>
     </main>
     <script>
-        
+
+        //Added map to show where the store is
+        let map = document.createElement('iframe');
+        let mapHolder = document.getElementById('map');
+        let key = "AIzaSyBMN5A6BZM022m3zZ35SsgwJWlTW3SGL4g"
+
+        $(document).ready( function() {
+            let store_name = $('#store').text();
+            let address = $('#address').text();
+            let search = `${store_name}, ${address}`
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(async position => {
+            
+                    console.log(search)
+            
+                    map.src = `https://www.google.com/maps/embed/v1/search?key=${key}&q=${search}&zoom=14`
+                    mapHolder.appendChild(map);
+                });
+            }
+        })
     </script>
 </body>
