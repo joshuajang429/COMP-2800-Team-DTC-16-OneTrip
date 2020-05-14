@@ -1,10 +1,10 @@
-DROP PROCEDURE IF EXISTS update_time;
+DROP PROCEDURE IF EXISTS update_time_test;
 DELIMITER //
 
-CREATE PROCEDURE update_time(IN userid INTEGER, IN storeid INTEGER, IN waittime INTEGER)
+CREATE PROCEDURE update_time_test(IN storeid INTEGER, IN waittime INTEGER)
 BEGIN
     INSERT INTO wait_times(user_id, store_id, wait_time)
-    VALUES(userid, storeid, waittime);
+    VALUES(1, storeid, waittime);
 END//
 DELIMITER ;
 

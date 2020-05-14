@@ -81,9 +81,14 @@ app.post("/storepage.ejs", (req, res) => {
     res.redirect(`/update.ejs?storeid=${storeid}`)
 })
 
-app.post("/storepage.ejs", (req, res) => {
-    let storeid = req.body.storeid;
-    res.redirect(`/update.ejs?storeid=${storeid}`)
+app.post("/update.ejs", (req, res) => {
+    let data = req.body;
+    console.log(`ID: ${data.store}, Time: ${data.wait_time}`);
+    db.execute(`CALL update_time_test(${data.store}, ${data.wait_time})`).
+    then(([Data, Metadata]) => {
+        res.redirect(`/storepage.ejs?storeid=${data.store}`)
+    }).
+    catch(error => console.log(error))
 })
 
 app.listen(PORT, () => {

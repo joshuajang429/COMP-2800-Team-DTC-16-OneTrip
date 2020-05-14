@@ -119,11 +119,11 @@
         </div>
     </nav>
     <main>
-        <form>
-            <span>How long did you wait at <%= storeData.store_name %> for?</span><br>
+        <form action="update.ejs" method="post">
+            <span>How long did you wait to enter <%= storeData.store_name %>?</span>
             <input type="text" name="wait_time" placeholder="Ex. 20" size="4">
-            <span>Minutes</span><br>
-            <input type="submit" value="Update">
+            <span>Minutes</span>
+            <button type="submit" name="store" value="<%= storeData.id %>">Update</button>
         </form>
         
     </main>
