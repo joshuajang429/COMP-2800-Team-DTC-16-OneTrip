@@ -51,11 +51,22 @@ app.get("/storepage.ejs", (req, res) => {
     catch(error => console.log(error))
 });
 
+app.get("/update.ejs", (req, res) => {
+    let storeid = req.query.storeid;
+    db.execute(`SELECT *, latest_wait_time(id) as wait_time FROM stores WHERE id = '${storeid}'`).
+    then(([Data, Metadata]) => {
+        console.log(Data);
+        res.render("pages/update", {storeData: Data[0]});
+    }).
+    catch(error => console.log(error))
+});
+
+
 
 
 //------Posting-------//
-
-app.post("/marketlist.ejs", (req, res) => {
+ 
+app.post("/marketlist.ejs", (req, res) =>{
     let input = req.body.storename;
     db.execute(`SELECT *, latest_wait_time(id) as wait_time FROM stores WHERE store_name LIKE '${input}'`).
     then(([Data, Metadata]) => {
@@ -63,6 +74,16 @@ app.post("/marketlist.ejs", (req, res) => {
         res.render("pages/marketlist", {result: Data});
     }).
     catch(error => console.log(error))
+})
+
+app.post("/storepage.ejs", (req, res) => {
+    let storeid = req.body.storeid;
+    res.redirect(`/update.ejs?storeid=${storeid}`)
+})
+
+app.post("/storepage.ejs", (req, res) => {
+    let storeid = req.body.storeid;
+    res.redirect(`/update.ejs?storeid=${storeid}`)
 })
 
 app.listen(PORT, () => {
