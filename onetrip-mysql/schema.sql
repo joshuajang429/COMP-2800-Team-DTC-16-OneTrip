@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS store_hours;
 CREATE TABLE store_info (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     store_name VARCHAR(50) NOT NULL,
-    offers_senior_store_hours BOOLEAN NOT NULL DEFAULT FALSE;
+    senior_hour_note TEXT DEFAULT NULL;
 );
 
 CREATE TABLE stores (

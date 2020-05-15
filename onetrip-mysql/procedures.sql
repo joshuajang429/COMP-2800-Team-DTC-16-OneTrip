@@ -43,6 +43,48 @@ BEGIN
 END//
 DELIMITER ;
 
+DROP FUNCTION IF EXISTS get_store_id;
+DELIMITER //
+CREATE FUNCTION get_store_id(storename VARCHAR(255)) 
+RETURNS INT READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT id
+      FROM store_info
+      WHERE store_name LIKE storename
+    );
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS get_store_info_with_id;
+DELIMITER //
+CREATE PROCEDURE get_store_info_with_id(IN storeid INT)
+BEGIN
+    SELECT *, (SELECT store_name FROM store_info WHERE store_info.id = store_info_id) as store_name, latest_wait_time(stores.id) as wait_time 
+    FROM stores WHERE id = storeid;
+END//
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS get_store_info_with_id_senior;
+DELIMITER //
+CREATE PROCEDURE get_store_info_with_id_senior(IN storeid INT)
+BEGIN
+    SELECT *, latest_wait_time(stores.id) as wait_time 
+    FROM stores JOIN store_info ON store_info_id = store_info.id 
+    WHERE stores.id = storeid;
+END//
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS get_store_info;
+DELIMITER //
+CREATE PROCEDURE get_store_info(IN storename VARCHAR(255))
+BEGIN
+    SELECT *, (SELECT store_name FROM store_info WHERE store_info.id = store_info_id) as store_name, latest_wait_time(stores.id) as wait_time 
+    FROM stores WHERE store_info_id = get_store_id(storename);
+END//
+DELIMITER ;
 
 
 DROP FUNCTION IF EXISTS latest_wait_time;
