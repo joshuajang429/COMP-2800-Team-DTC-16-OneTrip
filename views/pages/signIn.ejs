@@ -4,9 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/signIn.css">
     <link rel="shortcut icon" type="image/png" href="assets/onetrip_logo_small.png">
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+    
+    <script>
+        var firebaseConfig = {
+          apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
+          authDomain: "onetrip-5349f.firebaseapp.com",
+          databaseURL: "https://onetrip-5349f.firebaseio.com",
+          projectId: "onetrip-5349f",
+          storageBucket: "onetrip-5349f.appspot.com",
+          messagingSenderId: "752676431359",
+          appId: "1:752676431359:web:1be0e9787cb5b10f9ef3ca",
+          measurementId: "G-9EVM86CMWZ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+      </script>
+</head>
 <body>
         <div class="container">
           <div class="row">
@@ -14,7 +34,7 @@
               <div class="card card-signin my-5">
                 <div class="card-body">
                   <h5 class="card-title text-center">Sign In</h5>
-                  <form class="form-signin">
+                  <form class="form-signin" id="form-signin">
                     <div class="form-label-group">
                       <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                       <label for="inputEmail">Email address</label>
@@ -30,7 +50,7 @@
                       <label class="custom-control-label" for="customCheck1">Remember password</label>
                     </div>
                     <!-- <button id = "myButton" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button> -->
-                    <a href="Youhaveloggedin.ejs" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</a>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" id="signin-btn">Sign in</button>
                     <a href="signUp.ejs" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Don't have an account? Click here to sign up!</a>
                     <div style="text-align: center;">
                       <a href="/">Go back to Main Page</a>
@@ -44,6 +64,27 @@
             </div>
           </div>
         </div>
+        <!-- <script src="script/auth.js"></script> -->
+        <script> 
+          $('#signin-btn').click(function() {
+          var email = $("#inputEmail").val();
+          var password = $("#inputPassword").val();
+          var result = firebase.auth().signInWithEmailAndPassword(email, password);
+          result.catch(function(error) {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              console.log(errorCode);
+              console.log(errorMessage);
+          })
+          });
+          firebase.auth().onAuthStateChanged(function(user) {
+            if(user) {
+              window.location.href = "/";
+            } else {
+              console.log("you are not logged in");
+            }
+          });
+        </script>
       </body>
 </html>
 

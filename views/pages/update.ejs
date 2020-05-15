@@ -119,47 +119,17 @@
         </div>
     </nav>
     <main>
-        <div class="data"></div>
-            <a href="marketlist.ejs">Return to market list</a>
-            <h2 id="store"><%= storeData.store_name %>, <%= storeData.store_city%></h2>
-            <p id="address">Address: <%= storeData.store_address %></p>
-            <p>Phone: <%= storeData.phone %></p>
-            <% if(storeData.senior_hour_note !== null) { %>
-                <h4>Dedicated hours for seniors and people with disabilities: <%= storeData.senior_hour_note %></h4>
-
-            <% } else { %>
-                <h4>Unfortunately, there is no known dedicated hours for seniors and people with disabilities.</h4>
-            <% } %>
-            <h4>Latest wait time: <%= storeData.wait_time %> min</h4>
-            
-        </div>
-
-        <div id="map"></div>
-        <form action="/storepage.ejs" method="post">
-            <button type="submit" name="storeid" value="<%= storeData.id %>">Update time</button>
+        <form action="/update.ejs" method="post">
+            <span>How long did you wait to enter <%= storeData.store_name %>?</span>
+            <input type="text" name="wait_time" placeholder="Ex. 20" size="4">
+            <span>Minutes</span>
+            <button type="submit" name="store" value="<%= storeData.id %>">Update</button>
         </form>
         
     </main>
     <script>
-
-        //Added map to show where the store is
-        let map = document.createElement('iframe');
-        let mapHolder = document.getElementById('map');
-        let key = "AIzaSyBMN5A6BZM022m3zZ35SsgwJWlTW3SGL4g"
-
-        $(document).ready( function() {
-            let store_name = $('#store').text();
-            let address = $('#address').text();
-            let search = `${store_name}, ${address}`
-            if ('geolocation' in navigator) {
-                navigator.geolocation.getCurrentPosition(async position => {
-            
-                    console.log(search)
-            
-                    map.src = `https://www.google.com/maps/embed/v1/search?key=${key}&q=${search}&zoom=14`
-                    mapHolder.appendChild(map);
-                });
-            }
-        })
+        function redirect(id) {
+            window.location.replace(`https://onetrip.now.sh/storepage.ejs?storeid=${id}`);
+        }
     </script>
 </body>

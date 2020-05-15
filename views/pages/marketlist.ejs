@@ -78,4 +78,10 @@
 
     <img src="assets/easteregg.gif" id="easteregg" style="visibility:hidden">
     <script src="script/marketlist.js"></script>
+    <script>
+        function redirect(id) {
+            window.location.replace(`/storepage.ejs?storeid=${id}`);
+            // window.location.replace(`https://onetrip.now.sh/storepage.ejs?storeid=${id}`);
+        }
+    </script>
 </body>

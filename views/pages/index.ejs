@@ -12,6 +12,25 @@
     <link rel="stylesheet" href="css/landingPage.css">
 
     <link rel="shortcut icon" type="image/png" href="assets/onetrip_logo_small.png">
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
+        authDomain: "onetrip-5349f.firebaseapp.com",
+        databaseURL: "https://onetrip-5349f.firebaseio.com",
+        projectId: "onetrip-5349f",
+        storageBucket: "onetrip-5349f.appspot.com",
+        messagingSenderId: "752676431359",
+        appId: "1:752676431359:web:1be0e9787cb5b10f9ef3ca",
+        measurementId: "G-9EVM86CMWZ"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    </script>
 </head>
 
 <body>
@@ -164,5 +183,14 @@
             </div>
         </div>
     </section>
+    <script>
+    firebase.auth().onAuthStateChanged(function(user) {
+        if(user) {
+          console.log(user.email);
+        } else {
+          console.log("you are not logged in");
+        }
+      });
+    </script>
 </body>
 </html>
