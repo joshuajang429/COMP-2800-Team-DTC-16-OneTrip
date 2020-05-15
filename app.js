@@ -1,3 +1,16 @@
+var firebase = require("firebase/app");
+firebase.initializeApp({
+    apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
+    authDomain: "onetrip-5349f.firebaseapp.com",
+    databaseURL: "https://onetrip-5349f.firebaseio.com",
+    projectId: "onetrip-5349f",
+    storageBucket: "onetrip-5349f.appspot.com",
+    messagingSenderId: "752676431359",
+    appId: "1:752676431359:web:1be0e9787cb5b10f9ef3ca",
+    measurementId: "G-9EVM86CMWZ"
+  });
+require("firebase/auth");
+require("firebase/firestore");
 const express = require("express");
 const app = express();
 const mysql = require("mysql2");
