@@ -6,8 +6,6 @@ let search = document.getElementById('inputBox');
 
 document.querySelector('form.pure-form').addEventListener('submit', function(e) {
 
-    // console.log(search.value);
-
     if (search.value == "One Trip") {
         e.preventDefault();
         document.getElementById("easteregg").style.visibility = 'visible';

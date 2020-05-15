@@ -29,14 +29,14 @@ function initAutocomplete() {
             // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
             // Bias the SearchBox results towards current map's viewport.
-            map.addListener('bounds_changed', function () {
+            map.addListener('bounds_changed', function() {
                 searchBox.setBounds(map.getBounds());
             });
 
             var markers = [];
             // Listen for the event fired when the user selects a prediction and retrieve
             // more details for that place.
-            searchBox.addListener('places_changed', function () {
+            searchBox.addListener('places_changed', function() {
                 var places = searchBox.getPlaces();
 
                 if (places.length == 0) {
@@ -44,14 +44,14 @@ function initAutocomplete() {
                 }
 
                 // Clear out the old markers.
-                markers.forEach(function (marker) {
+                markers.forEach(function(marker) {
                     marker.setMap(null);
                 });
                 markers = [];
 
                 // For each place, get the icon, name and location.
                 var bounds = new google.maps.LatLngBounds();
-                places.forEach(function (place) {
+                places.forEach(function(place) {
                     if (!place.geometry) {
                         console.log("Returned place contains no geometry");
                         return;
@@ -69,6 +69,7 @@ function initAutocomplete() {
                         map: map,
                         icon: icon,
                         placeId: place.place_id,
+                        vicinity: place.vicinity,
                         animation: google.maps.Animation.DROP,
                         title: place.name,
                         position: place.geometry.location
@@ -84,20 +85,30 @@ function initAutocomplete() {
 
                 for (let i = 0; i < markers.length; i++) {
                     // markers[i].placeResult = results[i];
-                    google.maps.event.addListener(markers[i], 'click', async () => {
-                        const api_url = `/waittime/${markers[i].placeId}`
-                        const response = await fetch(api_url);
-                        const json = await response.json();
-                        // console.log(json);
-                        const waittime = json.waittime;
-                        // console.log(waittime)
+                    google.maps.event.addListener(markers[i], 'click', () => {
 
-                        service.getDetails({ placeId: markers[i].placeId }, (place, status) => {
+                        service.getDetails({
+                            placeId: markers[i].placeId,
+                            fields: ['name', 'rating', 'formatted_phone_number', 'geometry', 'vicinity', 'address_components']
+                        }, async(place, status) => {
                             if (status !== google.maps.places.PlacesServiceStatus.OK) {
                                 return;
                             }
+                            let vicinity = place['vicinity'];
+                            let lastIndex = (place['address_components'].length) - 1;
+                            let postal_Code = place['address_components'][lastIndex]["long_name"].split(' ')
+                            let postalCode = postal_Code[0] + postal_Code[1];
+                            console.log(vicinity, postalCode);
+
+                            const time_url = `/waittime/${postalCode}`
+                            const response = await fetch(time_url);
+                            const json = await response.json();
+                            // console.log(json);
+                            const waitTime = json.waittime;
+                            // console.log(waittime)
+
                             infoWindow.open(map, markers[i]);
-                            buildIWContent(place, waittime);
+                            buildIWContent(place, waitTime);
                         });
                     });
                 }
