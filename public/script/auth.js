@@ -26,11 +26,9 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 //         console.log("user has signed in");
 
 //     });
- 
 // })
 
 // $('#signin-btn').click(function() {
-    
 //     var email = $("#inputEmail").val();
 //     var password = $("#inputPassword").val();
 //     console.log("email: " + email + ", password: " + password);
@@ -58,6 +56,4 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 //         console.log("user has signed in");
 //         window.location.href = "/";
 // });
- 
 // })
-
