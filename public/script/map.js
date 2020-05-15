@@ -84,30 +84,60 @@ function initAutocomplete() {
 
                 for (let i = 0; i < markers.length; i++) {
                     // markers[i].placeResult = results[i];
-                    // google.maps.event.addListener(markers[i], 'click', showInfoWindow);
-                    google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+                    google.maps.event.addListener(markers[i], 'click', async () => {
+                        const api_url = `/waittime/${markers[i].placeId}`
+                        const response = await fetch(api_url);
+                        const json = await response.json();
+                        // console.log(json);
+                        const waittime = json.waittime;
+                        // console.log(waittime)
+
+                        service.getDetails({ placeId: markers[i].placeId }, (place, status) => {
+                            if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                                return;
+                            }
+                            infoWindow.open(map, markers[i]);
+                            buildIWContent(place, waittime);
+                        });
+                    });
+                    // google.maps.event.addListener(markers[i], 'click', async () => {
+                    //     const api_url = `/waittime/${markers[i].placeId}`
+                    //     const response = await fetch(api_url);
+                    //     const json = await response.json();
+                    //     // console.log(json);
+                    //     const waittime = json.waittime;
+                    //     // console.log(waittime)
+                    // });
                 }
 
-                // Get the place details for a hotel. Show the information in an info window,
-                // anchored on the marker for the hotel that the user selected.
-                function showInfoWindow() {
-                    let marker = this
-                    service.getDetails({ placeId: marker.placeId }, (place, status) => {
-                        if (status !== google.maps.places.PlacesServiceStatus.OK) {
-                            return;
-                        }
-                        infoWindow.open(map, marker);
-                        buildIWContent(place);
-                    });
-                }
+
+                // function showInfoWindow() {
+                //     let marker = this;
+
+                //     const api_url = `/waittime/${markers[i].placeId}`
+                //     const response = await fetch(api_url);
+                //     const json = await response.json();
+                //     // console.log(json);
+                //     const waittime = json.waittime;
+                //     // console.log(waittime)
+
+                //     service.getDetails({ placeId: marker.placeId }, (place, status) => {
+                //         if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                //             return;
+                //         }
+                //         infoWindow.open(map, marker);
+                //         buildIWContent(place, waittime);
+                //     });
+                // }
 
                 // Load the place information into the HTML elements used by the info window.
-                function buildIWContent(place) {
+                function buildIWContent(place, time) {
                     // document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
                     //     'src="' + place.icon + '"/>';
                     document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
                         '">' + place.name + '</a></b>';
                     document.getElementById('iw-address').textContent = place.vicinity;
+                    document.getElementById('iw-waiting').textContent = time + ' minutes';
 
                     if (place.formatted_phone_number) {
                         document.getElementById('iw-phone-row').style.display = '';

@@ -51,6 +51,29 @@ app.get("/storepage.ejs", (req, res) => {
     catch(error => console.log(error))
 });
 
+//-----Getting waittime from db-------//
+
+let fake_db = {ChIJOYsF8jt4hlQRDjdIUr1JI2o: 30}
+
+app.get("/waittime/:placeId", async (req, res) => {
+    const placeId = req.params.placeId.split(',');
+    const id = placeId[0];
+
+    if (id in fake_db) {
+        const waittime = fake_db[id];
+
+        const data = {
+            waittime: waittime
+        }
+        res.json(data);
+    } else {
+        const data = {
+            waittime: "N/A"
+        }
+        res.json(data);
+    }
+});
+
 
 
 //------Posting-------//
