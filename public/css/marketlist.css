@@ -159,6 +159,14 @@ div.data {
         margin: 20px;
         font-size: 4vw;
     }
+    #easteregg {
+        position: absolute;
+        width: 50%;
+        height: 50%;
+        top: 25%;
+        left: 25%;
+        z-index: 1;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -225,8 +233,8 @@ div.data {
     #easteregg {
         position: absolute;
         width: 50%;
-        height: 400px;
-        top: 300px;
+        height: 50%;
+        top: 25%;
         left: 25%;
         z-index: 1;
     }
