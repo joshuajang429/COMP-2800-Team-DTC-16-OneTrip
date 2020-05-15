@@ -1,235 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Market Lists</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" type="image/png" href="assets/onetrip_logo_small.png">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
-        body {
-            margin: 0;
-            font-family: 'Galindo', cursive;
-            font-style: normal;
-            font-weight: normal;
-            background-color: lightblue;
-        }
-        #red {
-            color: red;
-        }
-        #orange {
-            color: orange;
-        }
-        .title {
-            font-size: 54px;
-        }
-        main {
-            text-align: center;
-        }
-        div.data {
-            margin-top: 10px;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-row-gap: 10px;
-        }
-        @media (max-width: 425px) {
-            #map {
-                margin-top: 15px;
-                text-align: center;
-            }
-            iframe {
-                width: 320px;
-                height: 320px;
-                border: none;
-            }
-            #nearByStores {
-                margin-top: 15px;
-            }
-            #inputBox {
-                width: 66vw;
-                height: 50px;
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
-                            0px 4px 4px rgba(0, 0, 0, 0.25), 
-                            0px 4px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 10px;
-                padding-left: 10px;
-                font-size: 4vw;
-            }
-            #searchButton {
-                background: #97FFC1;
-                color: white;
-                height: 50px;
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
-                            0px 4px 4px rgba(0, 0, 0, 0.25), 
-                            0px 4px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 10px;
 
-            }
-            button.stores {
-                width: 90%;
-                height: 100px;
-                background-color: white;
-                border: 3px solid black;
-                border-radius: 16px;
-                color: #F85C2A;
-                padding-top: 13px;
-            }
-            .data {
-                font-family: Ex0;
-            }
-            h4 {
-                font-size: 6vw;
-                font-style: normal;
-                font-weight: bold;
-                }
-            h5#waitTime {
-                font-size: 8vw;
-                font-family: Exo;
-                font-style: normal;
-                font-weight: bold;
-                color:red
-            }
-            h5#goBackToMap {
-                margin: 20px;
-            }
-        }
-        @media (min-width: 426px) and (max-width: 1023px) {
-            #map {
-                margin-top: 15px;
-                text-align: center;
-            }
-            iframe {
-                width: 426px;
-                height: 426px;
-                border: none;
-            }
-            #nearByStores {
-                margin-top: 30px;
-                font-size: 7vw;
-            }
-            #inputBox {
-                width: 59vw;
-                height: 70px;
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
-                            0px 4px 4px rgba(0, 0, 0, 0.25), 
-                            0px 4px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 10px;
-                padding-left: 10px;
-                margin-top: 30px;
-                margin-bottom: 30px;
-                font-size: 5vw;
-            }
-            #searchButton {
-                background: #97FFC1;               
-                width: 20vw;
-                height: 70px;
-                font-size: 4vw;
-                color: white;
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
-                            0px 4px 4px rgba(0, 0, 0, 0.25), 
-                            0px 4px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 10px;
-            }
-            button.stores {
-                width: 80%;
-                height: 130px;
-                background-color: white;
-                border: 3px solid black;
-                border-radius: 16px;
-                color: #F85C2A;
-                padding-top: 7px;
-            }
-            .data {
-                font-family: Ex0;
-            }
-            h4 {
-                font-size: 4.5vw;
-                font-style: normal;
-                font-weight: bold;
-                }
-            h5#waitTime {
-                font-size: 5vw;
-                font-family: Exo;
-                font-style: normal;
-                font-weight: bold;
-                color: red;
-            }
-            h5#goBackToMap {
-                margin: 20px;
-                font-size: 4vw;
-            }
-        }
-        @media (min-width: 1024px) {
-            #map {
-                margin-top: 15px;
-                text-align: center;
-            }
-            iframe {
-                width: 600px;
-                height: 400px;
-                border: none;
-            }
-            #nearByStores {
-                margin-top: 30px;
-                font-size: 7vw;
-            }
-            #inputBox {
-                width: 59vw;
-                height: 90px;
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
-                            0px 4px 4px rgba(0, 0, 0, 0.25), 
-                            0px 4px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 10px;
-                padding-left: 20px;
-                margin-top: 30px;
-                margin-bottom: 30px;
-                font-size: 4vw;
-            }
-            #searchButton {
-                background: #97FFC1;               
-                width: 20vw;
-                height: 90px;
-                font-size: 4vw;
-                color: white;
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
-                            0px 4px 4px rgba(0, 0, 0, 0.25), 
-                            0px 4px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 10px;
-            }
-            button.stores {
-                width: 80%;
-                height: 140px;
-                background-color: white;
-                border: 3px solid black;
-                border-radius: 16px;
-                color: #F85C2A;
-                padding-top: 7px;
-            }
-            .data {
-                font-family: Ex0;
-            }
-            h4 {
-                font-size: 3vw;
-                font-style: normal;
-                font-weight: bold;
-                }
-            h5#waitTime {
-                font-size: 4vw;
-                font-family: Exo;
-                font-style: normal;
-                font-weight: bold;
-                color: red;
-            }
-            h5#goBackToMap {
-                margin: 20px;
-                font-size: 4vw;
-            }
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/marketlist.css">
+
 </head>
 
 <body>
@@ -243,7 +26,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapse_target">
-            
+
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
@@ -256,7 +39,7 @@
                 </li>
             </ul>
         </div>
-        <div class="navbar-collapse collapse order-3 dual-collapse2" id="collapse_target" >
+        <div class="navbar-collapse collapse order-3 dual-collapse2" id="collapse_target">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" id="auth">
                     <a class="nav-link" href="signIn.ejs">Log In</a>
@@ -284,15 +67,15 @@
                             <h5 id="waitTime">Wait: <%= item.wait_time %> min</h5>
                         </button>
                     </div>
-                <% } %>
-            <% } %>
+                    <% } %>
+                        <% } %>
         </div>
 
-        <a href="map.ejs"><h5 id="goBackToMap">Go Back to see Map</h5></a>
+        <a href="map.ejs">
+            <h5 id="goBackToMap">Go Back to see Map</h5>
+        </a>
     </main>
-    <script>
-        function redirect(id) {
-            window.location.replace(`https://onetrip.now.sh/storepage.ejs?storeid=${id}`);
-        }
-    </script>
+
+    <img src="assets/easteregg.gif" id="easteregg" style="visibility:hidden">
+    <script src="script/marketlist.js"></script>
 </body>

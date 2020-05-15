@@ -100,35 +100,7 @@ function initAutocomplete() {
                             buildIWContent(place, waittime);
                         });
                     });
-                    // google.maps.event.addListener(markers[i], 'click', async () => {
-                    //     const api_url = `/waittime/${markers[i].placeId}`
-                    //     const response = await fetch(api_url);
-                    //     const json = await response.json();
-                    //     // console.log(json);
-                    //     const waittime = json.waittime;
-                    //     // console.log(waittime)
-                    // });
                 }
-
-
-                // function showInfoWindow() {
-                //     let marker = this;
-
-                //     const api_url = `/waittime/${markers[i].placeId}`
-                //     const response = await fetch(api_url);
-                //     const json = await response.json();
-                //     // console.log(json);
-                //     const waittime = json.waittime;
-                //     // console.log(waittime)
-
-                //     service.getDetails({ placeId: marker.placeId }, (place, status) => {
-                //         if (status !== google.maps.places.PlacesServiceStatus.OK) {
-                //             return;
-                //         }
-                //         infoWindow.open(map, marker);
-                //         buildIWContent(place, waittime);
-                //     });
-                // }
 
                 // Load the place information into the HTML elements used by the info window.
                 function buildIWContent(place, time) {
