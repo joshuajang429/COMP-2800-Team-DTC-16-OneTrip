@@ -31,5 +31,8 @@ document.querySelector('form.pure-form').addEventListener('submit', function (e)
         });
     }
 
+~
+
+
     console.log(search.value);
 })
