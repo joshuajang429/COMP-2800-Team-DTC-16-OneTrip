@@ -5,10 +5,11 @@ function redirect(id) {
 let search = document.getElementById('inputBox');
 
 document.querySelector('form.pure-form').addEventListener('submit', function(e) {
-    e.preventDefault();
+
     // console.log(search.value);
 
     if (search.value == "One Trip") {
+        e.preventDefault();
         document.getElementById("easteregg").style.visibility = 'visible';
 
         let SCREEN_WIDTH = window.innerWidth
