@@ -10,12 +10,12 @@ DROP TABLE IF EXISTS store_hours;
 CREATE TABLE store_info (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     store_name VARCHAR(50) NOT NULL,
-    senior_hour_note TEXT DEFAULT NULL;
+    senior_hour_note TEXT DEFAULT NULL
 );
 
 CREATE TABLE stores (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    store_info_id INTEGER NOT NULL
+    store_info_id INTEGER NOT NULL,
     phone VARCHAR(10) NOT NULL,
     store_address VARCHAR(255) NOT NULL,
     store_post_code VARCHAR(6) NOT NULL,

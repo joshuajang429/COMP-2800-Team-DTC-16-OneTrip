@@ -70,7 +70,7 @@ DROP PROCEDURE IF EXISTS get_store_info_with_id_senior;
 DELIMITER //
 CREATE PROCEDURE get_store_info_with_id_senior(IN storeid INT)
 BEGIN
-    SELECT *, latest_wait_time(stores.id) as wait_time 
+    SELECT stores.id, phone, store_address, store_post_code, store_city, store_name, senior_hour_note, latest_wait_time(stores.id) as wait_time 
     FROM stores JOIN store_info ON store_info_id = store_info.id 
     WHERE stores.id = storeid;
 END//
