@@ -1,4 +1,10 @@
-var firebase = require("firebase/app");
+const express = require("express");
+const app = express();
+const mysql = require("mysql2");
+const path = require("path");
+const PORT = process.env.PORT || 3000;
+
+const firebase = require("firebase/app");
 firebase.initializeApp({
     apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
     authDomain: "onetrip-5349f.firebaseapp.com",
@@ -10,12 +16,7 @@ firebase.initializeApp({
     measurementId: "G-9EVM86CMWZ"
 });
 require("firebase/auth");
-require("firebase/firestore");
-const express = require("express");
-const app = express();
-const mysql = require("mysql2");
-const path = require("path");
-const PORT = process.env.PORT || 3000;
+// require("firebase/firestore");
 
 const db = mysql.createPool({
     host: 'sql3.freemysqlhosting.net',
@@ -66,8 +67,6 @@ app.get("/storepage.ejs", (req, res) => {
 
 //-----Getting waittime from db-------//
 
-let fake_db = { ChIJOYsF8jt4hlQRDjdIUr1JI2o: 30 }
-
 app.get("/waittime/:postalCode", async(req, res) => {
     const placeId = req.params.postalCode.split(',');
     const postalCode = placeId[0];
@@ -89,20 +88,6 @@ app.get("/waittime/:postalCode", async(req, res) => {
         }
     }).
     catch(error => console.log(error))
-
-    // if (postalCode) {
-    //     const waittime = fake_db[id];
-
-    //     const data = {
-    //         waittime: waittime
-    //     }
-    //     res.json(data);
-    // } else {
-    //     const data = {
-    //         waittime: "N/A"
-    //     }
-    //     res.json(data);
-    // }
 });
 
 app.get("/update.ejs", (req, res) => {
@@ -115,9 +100,6 @@ app.get("/update.ejs", (req, res) => {
     }).
     catch(error => console.log(error))
 });
-
-
-
 
 //------Posting-------//
 
