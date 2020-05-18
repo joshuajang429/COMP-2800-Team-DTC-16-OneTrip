@@ -146,7 +146,7 @@
                                 console.log("Returned place contains no geometry");
                                 return;
                             }
-                            var icon = {
+                            var marker_icon = {
                                 url: place.icon,
                                 size: new google.maps.Size(71, 71),
                                 origin: new google.maps.Point(0, 0),
@@ -157,7 +157,7 @@
                             // Create a marker for each place.
                             markers.push(new google.maps.Marker({
                                 map: map,
-                                icon: icon,
+                                icon: marker_icon,
                                 placeId: place.place_id,
                                 vicinity: place.vicinity,
                                 animation: google.maps.Animation.DROP,
