@@ -81,6 +81,10 @@
                     <td class="iw_attribute_name">Wait Time:</td>
                     <td id="iw-waiting"></td>
                 </tr>
+                <tr id="iw-storelink-row" class="iw_table_row">
+                    <td id="iw-icon" class="iw_table_icon"></td>
+                    <td id="iw-storelink"></td>
+                </tr>
             </table>
         </div>
     </div>
@@ -195,23 +199,26 @@
                                     const json = await response.json();
                                     // console.log(json);
                                     const waitTime = json.waittime;
+                                    const storeID = json.storeid;
                                     // console.log(waittime)
 
                                     infoWindow.open(map, markers[i]);
-                                    buildIWContent(place, waitTime);
+                                    buildIWContent(place, waitTime, storeID);
                                 });
                             });
                         }
 
                         // Load the place information into the HTML elements used by the info window.
-                        function buildIWContent(place, time) {
+                        function buildIWContent(place, time, id) {
                             // document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
                             //     'src="' + place.icon + '"/>';
                             document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
                                 '">' + place.name + '</a></b>';
                             document.getElementById('iw-address').textContent = place.vicinity;
                             document.getElementById('iw-waiting').textContent = time + ' minutes';
+                            document.getElementById('iw-storelink').innerHTML = `<b><a href="/storepage.ejs?storeid=${id}"><button>Select Store</button></a></b>`;
 
+                        
                             if (place.formatted_phone_number) {
                                 document.getElementById('iw-phone-row').style.display = '';
                                 document.getElementById('iw-phone').textContent =

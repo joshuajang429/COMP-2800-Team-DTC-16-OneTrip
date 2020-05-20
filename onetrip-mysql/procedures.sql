@@ -56,6 +56,19 @@ BEGIN
 END //
 DELIMITER ;
 
+DROP FUNCTION IF EXISTS get_store_id_with_post_code;
+DELIMITER //
+CREATE FUNCTION get_store_id(postcode TEXT) 
+RETURNS INT READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT id
+      FROM stores
+      WHERE store_post_code LIKE postcode
+    );
+END //
+DELIMITER ;
+
 DROP PROCEDURE IF EXISTS get_store_info_with_id;
 DELIMITER //
 CREATE PROCEDURE get_store_info_with_id(IN storeid INT)
@@ -97,6 +110,19 @@ BEGIN
       FROM wait_times
       WHERE wait_times.store_id = id
       ORDER BY wait_times.created DESC LIMIT 1
+    );
+END //
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS get_average_time;
+DELIMITER //
+CREATE FUNCTION get_average_time(id INT)
+RETURNS INT READS SQL DATA
+BEGIN
+    RETURN (
+        SELECT avg(wait_time)
+        FROM wait_times
+        WHERE wait_times.store_id = id
     );
 END //
 DELIMITER ;

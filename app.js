@@ -71,18 +71,21 @@ app.get("/waittime/:postalCode", async(req, res) => {
     const placeId = req.params.postalCode.split(',');
     const postalCode = placeId[0];
 
-    db.execute(`SELECT latest_wait_time_post_code('${postalCode}') as wait_time`).
+    db.execute(`SELECT latest_wait_time_post_code('${postalCode}') as wait_time, get_store_id_with_post_code('${postalCode}') as store_id`).
     then(([Data, Metadata]) => {
         let waitTime = Data[0]['wait_time'];
+        let storeID = Data[0]['store_id']
 
-        if (waitTime != null) {
+        if (waitTime != null && storeID != null) {
             const data = {
-                waittime: waitTime
+                waittime: waitTime,
+                storeid: storeID
             }
             res.json(data);
         } else {
             const data = {
-                waittime: "N/A"
+                waittime: "N/A",
+                storeid: 0
             }
             res.json(data);
         }
@@ -92,7 +95,6 @@ app.get("/waittime/:postalCode", async(req, res) => {
 
 app.get("/update.ejs", (req, res) => {
     let storeid = req.query.storeid;
-    console.log(storeid + "KLJHKJ");
     db.execute(`CALL get_store_info_with_id(${storeid})`).
     then(([Data, Metadata]) => {
         console.log(Data[0]);
