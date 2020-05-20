@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/signUp.css">
+    <link rel="shortcut icon" type="image/png" href="assets/onetrip_logo_small.png">
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+    
+    <script>
+        var firebaseConfig = {
+          apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
+          authDomain: "onetrip-5349f.firebaseapp.com",
+          databaseURL: "https://onetrip-5349f.firebaseio.com",
+          projectId: "onetrip-5349f",
+          storageBucket: "onetrip-5349f.appspot.com",
+          messagingSenderId: "752676431359",
+          appId: "1:752676431359:web:1be0e9787cb5b10f9ef3ca",
+          measurementId: "G-9EVM86CMWZ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // db.settings({timesStampsInSnapshots: true});
+      </script>
+</head>
+
+<body>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+              <div class="card card-signin flex-row my-5">
+                <div class="card-img-left d-none d-md-flex">
+                   <!-- Background image for card set in CSS! -->
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title text-center">Register</h5>
+                  <form class="form-signin" id="form-signup">
+                    <div class="form-label-group">
+                      <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
+                      <label for="inputUserame">Username</label>
+                    </div>
+      
+                    <div class="form-label-group">
+                      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+                      <label for="inputEmail">Email address</label>
+                    </div>
+                    
+                    <hr>
+      
+                    <div class="form-label-group">
+                      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                      <label for="inputPassword">Password</label>
+                    </div>
+                    
+                    <div class="form-label-group">
+                      <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
+                      <label for="inputConfirmPassword">Confirm password</label>
+                    </div>
+      
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" id="signup-btn">Register</button>
+                    <a href="signIn.ejs" class="d-block text-center mt-2 small">Already have an account?</a>
+                    <hr class="my-4">
+                    <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
+                    <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script src="script/auth.js"></script>
+      </body>
+</html>

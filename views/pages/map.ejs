@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Places Search Box</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </script>
+    <link rel="shortcut icon" type="image/png" href="assets/onetrip_logo_small.png">
+
+    <link rel="stylesheet" type="text/css" href="css/map.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand" href="/">
+            <img src="assets/onetrip_logo_small.png" class="d-inline-block align-top" alt="" width="40px" height="40px">
+        </a>
+        <a class="navbar-brand" href="/"> <span id="red">One</span> <span id="orange">Trip</span> </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapse_target">
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#goals">Goals/Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#about">About Us</a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse order-3 dual-collapse2" id="collapse_target">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" id="auth">
+                    <a class="nav-link" href="signIn.ejs">Log In</a>
+                </li>
+                <li class="nav-item" id="auth">
+                    <a class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <h2>Nearby Stores</h2>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map"></div>
+
+    <a href="marketlist.ejs">Click Here to See Wait Times</a>
+
+    <div style="display: none">
+        <div id="info-content">
+            <table>
+                <tr id="iw-url-row" class="iw_table_row">
+                    <td id="iw-icon" class="iw_table_icon"></td>
+                    <td id="iw-url"></td>
+                </tr>
+                <tr id="iw-address-row" class="iw_table_row">
+                    <td class="iw_attribute_name">Address:</td>
+                    <td id="iw-address"></td>
+                </tr>
+                <tr id="iw-phone-row" class="iw_table_row">
+                    <td class="iw_attribute_name">Telephone:</td>
+                    <td id="iw-phone"></td>
+                </tr>
+                <tr id="iw-rating-row" class="iw_table_row">
+                    <td class="iw_attribute_name">Rating:</td>
+                    <td id="iw-rating"></td>
+                </tr>
+                <tr id="iw-waiting-row" class="iw_table_row">
+                    <td class="iw_attribute_name">Wait Time:</td>
+                    <td id="iw-waiting"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        var map, service, infoWindow;
+
+        function initAutocomplete() {
+
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition((pos) => {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: {
+                            lat: pos.coords.latitude,
+                            lng: pos.coords.longitude
+                        },
+                        zoom: 13,
+                        mapTypeId: 'roadmap'
+                    });
+
+                    marker = new google.maps.Marker({
+                        map: map,
+                        position: {
+                            lat: pos.coords.latitude,
+                            lng: pos.coords.longitude
+                        }
+                    });
+
+                    infoWindow = new google.maps.InfoWindow({
+                        content: document.getElementById('info-content')
+                    });
+                    service = new google.maps.places.PlacesService(map);
+
+                    // Create the search box and link it to the UI element.
+                    var input = document.getElementById('pac-input');
+                    var searchBox = new google.maps.places.SearchBox(input);
+                    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+                    // Bias the SearchBox results towards current map's viewport.
+                    map.addListener('bounds_changed', function() {
+                        searchBox.setBounds(map.getBounds());
+                    });
+
+                    var markers = [];
+                    // Listen for the event fired when the user selects a prediction and retrieve
+                    // more details for that place.
+                    searchBox.addListener('places_changed', function() {
+                        var places = searchBox.getPlaces();
+
+                        if (places.length == 0) {
+                            return;
+                        }
+
+                        // Clear out the old markers.
+                        markers.forEach(function(marker) {
+                            marker.setMap(null);
+                        });
+                        markers = [];
+
+                        // For each place, get the icon, name and location.
+                        var bounds = new google.maps.LatLngBounds();
+                        places.forEach(function(place) {
+                            if (!place.geometry) {
+                                console.log("Returned place contains no geometry");
+                                return;
+                            }
+                            var marker_icon = {
+                                url: place.icon,
+                                size: new google.maps.Size(71, 71),
+                                origin: new google.maps.Point(0, 0),
+                                anchor: new google.maps.Point(17, 34),
+                                scaledSize: new google.maps.Size(25, 25)
+                            };
+
+                            // Create a marker for each place.
+                            markers.push(new google.maps.Marker({
+                                map: map,
+                                icon: marker_icon,
+                                placeId: place.place_id,
+                                vicinity: place.vicinity,
+                                animation: google.maps.Animation.DROP,
+                                title: place.name,
+                                position: place.geometry.location
+                            }));
+
+                            if (place.geometry.viewport) {
+                                // Only geocodes have viewport.
+                                bounds.union(place.geometry.viewport);
+                            } else {
+                                bounds.extend(place.geometry.location);
+                            }
+                        });
+
+                        for (let i = 0; i < markers.length; i++) {
+                            // markers[i].placeResult = results[i];
+                            google.maps.event.addListener(markers[i], 'click', () => {
+
+                                service.getDetails({
+                                    placeId: markers[i].placeId,
+                                    fields: ['name', 'rating', 'formatted_phone_number', 'geometry', 'vicinity', 'address_components']
+                                }, async(place, status) => {
+                                    if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                                        return;
+                                    }
+                                    let vicinity = place['vicinity'];
+                                    let lastIndex = (place['address_components'].length) - 1;
+                                    let postal_Code = place['address_components'][lastIndex]["long_name"].split(' ')
+                                    let postalCode = postal_Code[0] + postal_Code[1];
+                                    console.log(vicinity, postalCode);
+
+                                    const time_url = `/waittime/${postalCode}`
+                                    const response = await fetch(time_url);
+                                    const json = await response.json();
+                                    // console.log(json);
+                                    const waitTime = json.waittime;
+                                    // console.log(waittime)
+
+                                    infoWindow.open(map, markers[i]);
+                                    buildIWContent(place, waitTime);
+                                });
+                            });
+                        }
+
+                        // Load the place information into the HTML elements used by the info window.
+                        function buildIWContent(place, time) {
+                            // document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
+                            //     'src="' + place.icon + '"/>';
+                            document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
+                                '">' + place.name + '</a></b>';
+                            document.getElementById('iw-address').textContent = place.vicinity;
+                            document.getElementById('iw-waiting').textContent = time + ' minutes';
+
+                            if (place.formatted_phone_number) {
+                                document.getElementById('iw-phone-row').style.display = '';
+                                document.getElementById('iw-phone').textContent =
+                                    place.formatted_phone_number;
+                            } else {
+                                document.getElementById('iw-phone-row').style.display = 'none';
+                            }
+
+                            // Assign a five-star rating to the hotel, using a black star ('&#10029;')
+                            // to indicate the rating the hotel has earned, and a white star ('&#10025;')
+                            // for the rating points not achieved.
+                            if (place.rating) {
+                                var ratingHtml = '';
+                                for (var i = 0; i < 5; i++) {
+                                    if (place.rating < (i + 0.5)) {
+                                        ratingHtml += '&#10025;';
+                                    } else {
+                                        ratingHtml += '&#10029;';
+                                    }
+                                    document.getElementById('iw-rating-row').style.display = '';
+                                    document.getElementById('iw-rating').innerHTML = ratingHtml;
+                                }
+                            } else {
+                                document.getElementById('iw-rating-row').style.display = 'none';
+                            }
+                        }
+                        map.fitBounds(bounds);
+                    });
+
+                });
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMN5A6BZM022m3zZ35SsgwJWlTW3SGL4g&libraries=places&callback=initAutocomplete" async defer></script>
+</body>
+
+</html>

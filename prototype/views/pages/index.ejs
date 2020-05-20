@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Log In Page</title>
+</head>
+
+<body>
+
+    <main>
+
+        <!-- One Trip Title -->
+        <div class="oneTrip">
+            <p id="one"><b>One</b></p>
+            <p id="trip"><b>Trip</b></p>
+        </div>
+
+
+        <!-- Logo For Cat -->
+        <div id="catLogo">
+            <!-- <a href="      ">    "ABOUT US" Will Go Here    -->
+                <img src="img/catLogo.png">
+            </a>
+        </div>
+        
+
+        <!-- Login Input -->
+        <form action="/index" method="post">
+            <div class="login">
+
+                <input id="idInput" type="text" name="id" onfocus="this.value=''" value="ID"></p>
+                
+                <input id="passwordInput" type="text" name="password" onfocus="this.value=''" value="PASSWORD"></p>
+                
+            <!-- We Need to Change Once user Authentication works!-->
+            <!-- <input id="goButton" type="button" value="GO> -->
+                <input id="goButton" type="button" value="GO" onclick="window.location.href='/findlocation';">
+                
+            </div>
+        </form>
+
+
+        <!-- Sign In String -->
+        <div id="signIn">
+            <a href="/signin" style="text-decoration: none">Click to sign up</a>
+        </div>
+
+
+        <!-- BCIT logo -->
+        <div>
+            <!-- <a href="     ">    "Our Landing Page" will Go Here -->
+            <img src="img/bcit.png" id="logo">
+        </div>
+
+
+        <!-- Team 16 -->
+        <div>
+            <a href="     " id="team16" style="text-decoration: none">DTC Team 16</a>
+        </div>
+
+
+
+    
+    </main>
+    
+</body>
+</html>

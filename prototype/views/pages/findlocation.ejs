@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="findlocation.css">
+    <title>Find Location</title>
+</head>
+
+<body>
+    <main>
+
+        <!-- Log out -->
+        <div id="logOut">
+            <a href="/">
+                <p id=logoutButton>Log Out</p>
+            </a>
+        </div>
+
+        <!-- User Icon -->
+        <img src="img/userIcon.png" id="userIcon">
+
+
+        <!-- Location Input-->
+        <!-- Need to Change After Apply Google API -->
+        <form action="/map" method="post">
+            <div>
+                <input id="marketInput" type="text" name="id" onfocus="this.value=''" value="MARKET"></p>
+            </div>
+
+        <!-- "GO" Button -->
+        <!-- We Need to Change Once API works!-->
+            <!-- <input id="goButton" type="submit" value="GO"> -->
+            <input id="goButton" type="button" value="GO" onclick="window.location.href='/map';">
+        </form>
+
+        
+        <!-- Speech Bubble -->
+            <div>
+                <img src="img/speechBubble.png" id="speechBubble">
+                <p id="enterMarket">Type the Market!</p>
+            </div>
+
+        <!-- Logo For Cat -->
+        <div id="catLogo">
+            <!-- <a href="      ">    "ABOUT US" Will Go Here    -->
+                <img src="img/catLogo.png">
+            </a>
+        </div>
+    </main>
+</body>
+</html>

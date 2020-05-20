@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="signin.css">
+    <title>Sign In Page</title>
+</head>
+
+<body>
+    <div>
+        <main>
+
+            <!-- Go Back -->
+            <div>
+                <a href="/">
+                <img src="img/goBack.png" id="goBack">
+                </a>
+            </div>
+
+            <!-- "Sign With" String -->
+            <div>
+                <p id="signWith">sign with</p>
+            </div>
+
+            
+            <!-- Google & Facebook -->
+            <div>
+                <a href="https://www.google.com">      <!-- USER AUTHENTICATION -->
+                    <img src="img/google.png" id="googleImg">             
+                </a>
+
+                <p id="or">or</p>
+
+                <a href="https://wwww.facebook.com">    <!-- USER AUTHENTICATION -->   
+                    <img src="img/facebook.png" id="facebookImg">
+                </a>
+            </div>
+
+            
+            <!-- User Info Input -->
+            <form action="/index" method="post">
+                <div class="userInput">
+                    
+                    <input id="nameInput" type="text" name="name" onfocus="this.value=''" value="NAME">
+
+                    <input id="idInput" type="text" name="id" onfocus="this.value=''" value="ID">
+
+                    <input id="passwordInput" type="text" name="password" onfocus="this.value=''" value="PASSWORD">
+
+                    <input id="emailInput" type="text" name="email" onfocus="this.value=''" value="EMAIL/MOBILE">
+                </div>
+
+
+                <!-- Confirm Button -->
+                <div>
+                    <a href="/">
+                        <!-- Need to Change Once User Authentication -->
+                        <!-- <input id="confirmButton" type="submit" value="CONFIRM"> -->
+                        <input id="confirmButton" type="button" value="CONFIRM" onclick="window.location.href='/';">
+                    </a>
+                </div>
+            </form>
+
+</body>
+</html>
