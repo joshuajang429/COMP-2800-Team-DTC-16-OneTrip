@@ -241,6 +241,7 @@
                                     const response = await fetch(time_url);
                                     const json = await response.json();
                                     const waitTime = json.waittime;
+                                    const storeID = json.storeid;
 
                                     infoWindow.open(map, markers[i]);
                                     buildIWContent(place, waitTime, storeID);
@@ -249,7 +250,7 @@
                         }
 
                         // Load the place information into the HTML elements used by the info window.
-                        function buildIWContent(place, time) {
+                        function buildIWContent(place, time, id) {
                             document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
                                 '">' + place.name + '</a></b>';
                             document.getElementById('iw-address').textContent = place.vicinity;
