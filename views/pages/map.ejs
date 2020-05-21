@@ -80,6 +80,10 @@
                     <td class="iw_attribute_name">Wait Time:</td>
                     <td id="iw-waiting"></td>
                 </tr>
+                <tr id="iw-storelink-row" class="iw_table_row">
+                    <td id="iw-icon" class="iw_table_icon"></td>
+                    <td id="iw-storelink"></td>
+                </tr>
             </table>
         </div>
     </div>
@@ -220,7 +224,7 @@
                                     const waitTime = json.waittime;
 
                                     infoWindow.open(map, markers[i]);
-                                    buildIWContent(place, waitTime);
+                                    buildIWContent(place, waitTime, storeID);
                                 });
                             });
                         }
@@ -231,7 +235,9 @@
                                 '">' + place.name + '</a></b>';
                             document.getElementById('iw-address').textContent = place.vicinity;
                             document.getElementById('iw-waiting').textContent = time + ' minutes';
+                            document.getElementById('iw-storelink').innerHTML = `<b><a href="/storepage.ejs?storeid=${id}"><button>Select Store</button></a></b>`;
 
+                        
                             if (place.formatted_phone_number) {
                                 document.getElementById('iw-phone-row').style.display = '';
                                 document.getElementById('iw-phone').textContent =
