@@ -8,6 +8,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/update.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" type="image/png" href="assets/onetrip_logo_small.png">
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
@@ -27,88 +28,7 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
-        body {
-            margin: 0;
-            font-family: 'Galindo', cursive;
-            font-style: normal;
-            font-weight: normal;
-            background-color: lightblue;
-        }
-        
-        #red {
-            color: red;
-        }
-        
-        #orange {
-            color: orange;
-        }
-        
-        .title {
-            font-size: 54px;
-        }
-        
-        main {
-            text-align: center;
-        }
-        
-        button.stores {
-            width: 300px;
-            background-color: white;
-            border: 3px solid black;
-            border-radius: 10px;
-            color: #F85C2A;
-        }
-        
-        div.data {
-            margin-top: 10px;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-row-gap: 10px;
-            justify-content: center;
-        }
-        
-        #update {
-            width: 100px;
-        }
-        
-        @media (max-width: 425px) {
-            #map {
-                margin-top: 15px;
-                text-align: center;
-            }
-            iframe {
-                width: 320px;
-                height: 320px;
-                border: none;
-            }
-        }
-        
-        @media (min-width: 426px) and (max-width: 1023px) {
-            #map {
-                margin-top: 15px;
-                text-align: center;
-            }
-            iframe {
-                width: 426px;
-                height: 426px;
-                border: none;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            #map {
-                margin-top: 15px;
-                text-align: center;
-            }
-            iframe {
-                width: 600px;
-                height: 500px;
-                border: none;
-            }
-        }
-    </style>
+
 </head>
 
 <body>
@@ -155,12 +75,19 @@
         </div>
     </nav>
     <main>
+        <img id="catlogo" src="assets/onetrip_logo_large.png">
+        <img id="bubble" src="assets/bubble.png">
+
         <form action="/update.ejs" method="post">
-            <span>How long did you wait to enter <%= storeData.store_name %>?</span>
-            <input type="text" name="wait_time" placeholder="Ex. 20" size="4">
-            <span>Minutes</span>
-            <button type="submit" name="store" value="<%= storeData.id %>">Update</button>
+            <div id="text">
+                <p>How long did you wait to enter
+                    <%= storeData.store_name %>?</p>
+                <input id="input" type="text" name="wait_time" placeholder="Ex. 20" size="4">
+                <span>Minutes</span>
+            </div>
+            <button id="update" type="submit" name="store" value="<%= storeData.id %>">Update</button>
         </form>
+        </div>
 
     </main>
     <script>

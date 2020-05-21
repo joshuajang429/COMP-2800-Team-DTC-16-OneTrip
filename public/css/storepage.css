@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
+body {
+    margin: 0;
+    font-family: 'Galindo', cursive;
+    font-style: normal;
+    font-weight: normal;
+    background-color: lightblue;
+}
+#red {
+    color: red;
+}
+#orange {
+    color: orange;
+}
+.title {
+    font-size: 54px;
+}
+main {
+    text-align: center;
+}
+button.stores {
+    width: 300px;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 10px;
+    color: #F85C2A;
+}
+div.data {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 10px;
+    justify-content: center;
+}
+#update {
+    width: 100px;
+}
+@media (max-width: 425px) {
+    #map {
+        margin-top: 15px;
+        text-align: center;
+    }
+    iframe {
+        width: 350px;
+        height: 320px;
+        border: none;
+    }
+    .data {
+        border: 2px solid black;
+        background-color: white;
+        border-radius: 20px;
+        margin-left: 3%;
+        margin-right: 3%;
+        padding-top: 10px;
+    }
+    #return {
+        background-color: skyblue;
+        font-size: 7vw;
+        color: white;
+        border: 2px solid white;
+        border-radius: 10px;
+        padding-left: 7%;
+        padding-right: 7%;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);    
+    }
+    #store {
+        color: #F85C2A;
+        font-size: 20px;
+    }
+    #storeInfo {
+        text-align: left;
+        padding-left: 5%;
+        padding-right: 5%;
+        line-height: 1.0;
+        margin-bottom: 0;
+    }
+    #address, #phone{
+        color: red;
+        font-size: 20px;
+    }
+    #senior {
+        color: red;
+        font-size: 19px;
+    }
+    #latest {
+        text-align: left;
+        font-size: 19px;
+        margin-bottom: 10px;
+        color: red;
+    }
+    #waitTime {
+        color: black;
+        font-size: 25px;
+    }
+    #update {
+        background: #97FFC1;    
+        color: white;
+        width: 94%;
+        margin-top: 8px;
+        height: 44px;
+        font-size: 7vw;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
+                    0px 4px 4px rgba(0, 0, 0, 0.25), 
+                    0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        border: 2px solid white;
+    }           
+}
+@media (min-width: 426px) and (max-width: 1023px) {
+    #map {
+        margin-top: 15px;
+        text-align: center;
+    }
+    iframe {
+        width: 80%;
+        height: 426px;
+        border: none;
+    }
+    .data {
+        border: 2px solid black;
+        background-color: white;
+        border-radius: 20px;
+        margin-left: 10%;
+        margin-right: 10%;
+        padding-top: 10px;
+    }
+    #return {
+        background-color: skyblue;
+        font-size: 5.2vw;
+        width: 90%;
+        color: white;
+        border: 2px solid white;
+        border-radius: 10px;
+        padding-left: 7%;
+        padding-right: 7%;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);    
+    }
+    #store {
+        color: #F85C2A;
+        font-size: 35px;
+    }
+    #storeInfo {
+        text-align: left;
+        padding-left: 5%;
+        padding-right: 5%;
+        line-height: 1.0;
+        margin-bottom: 0;
+        font-size: 20px;
+    }
+    #address, #phone{
+        color: red;
+        font-size: 25px;
+    }
+    #senior {
+        color: red;
+        font-size: 25px;
+    }
+    #latest {
+        text-align: left;
+        font-size: 25px;
+        margin-bottom: 10px;
+        color: red;
+    }
+    #waitTime {
+        color: black;
+        font-size: 30px;
+    }
+    #update {
+        background: #97FFC1;    
+        color: white;
+        width: 80%;
+        margin-top: 8px;
+        height: 60px;
+        font-size: 40px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
+                    0px 4px 4px rgba(0, 0, 0, 0.25), 
+                    0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        border: 2px solid white;
+    }  
+}
+@media (min-width: 1024px) {
+    #map {
+        margin-top: 15px;
+        text-align: center;
+    }
+    iframe {
+        width: 50%;
+        height: 426px;
+        border: none;
+    }
+    .data {
+        border: 2px solid black;
+        background-color: white;
+        border-radius: 20px;
+        margin-left: 25%;
+        margin-right: 25%;
+        padding-top: 10px;
+    }
+    #return {
+        background-color: skyblue;
+        font-size: 30px;
+        color: white;
+        border: 2px solid white;
+        border-radius: 10px;
+        padding-left: 7%;
+        padding-right: 7%;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);    
+    }
+    #store {
+        color: #F85C2A;
+        font-size: 35px;
+    }
+    #storeInfo {
+        text-align: left;
+        padding-left: 10%;
+        padding-right: 10%;
+        line-height: 1.0;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+    #address, #phone{
+        color: red;
+        font-size: 25px;
+    }
+    #senior {
+        color: red;
+        font-size: 25px;
+    }
+    #latest {
+        text-align: left;
+        font-size: 25px;
+        margin-bottom: 10px;
+        color: red;
+    }
+    #waitTime {
+        color: black;
+        font-size: 30px;
+    }
+    #update {
+        background: #97FFC1;    
+        color: white;
+        width: 50%;
+        margin-top: 8px;
+        height: 60px;
+        font-size: 40px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 
+                    0px 4px 4px rgba(0, 0, 0, 0.25), 
+                    0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        border: 2px solid white;
+    }  
+}

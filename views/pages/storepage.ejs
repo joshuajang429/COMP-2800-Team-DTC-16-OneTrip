@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/storePage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/storepage.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" type="image/png" href="assets/onetrip_logo_small.png">
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
@@ -29,88 +30,7 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
-        body {
-            margin: 0;
-            font-family: 'Galindo', cursive;
-            font-style: normal;
-            font-weight: normal;
-            background-color: lightblue;
-        }
-        
-        #red {
-            color: red;
-        }
-        
-        #orange {
-            color: orange;
-        }
-        
-        .title {
-            font-size: 54px;
-        }
-        
-        main {
-            text-align: center;
-        }
-        
-        button.stores {
-            width: 300px;
-            background-color: white;
-            border: 3px solid black;
-            border-radius: 10px;
-            color: #F85C2A;
-        }
-        
-        div.data {
-            margin-top: 10px;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-row-gap: 10px;
-            justify-content: center;
-        }
-        
-        #update {
-            width: 100px;
-        }
-        
-        @media (max-width: 425px) {
-            #map {
-                margin-top: 15px;
-                text-align: center;
-            }
-            iframe {
-                width: 320px;
-                height: 320px;
-                border: none;
-            }
-        }
-        
-        @media (min-width: 426px) and (max-width: 1023px) {
-            #map {
-                margin-top: 15px;
-                text-align: center;
-            }
-            iframe {
-                width: 426px;
-                height: 426px;
-                border: none;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            #map {
-                margin-top: 15px;
-                text-align: center;
-            }
-            iframe {
-                width: 600px;
-                height: 500px;
-                border: none;
-            }
-        }
-    </style>
+
 </head>
 
 <body>
@@ -157,35 +77,37 @@
         </div>
     </nav>
     <main>
-        <div class="data"></div>
-        <a href="marketlist.ejs">Return to market list</a>
-        <h2 id="store">
-            <%= storeData.store_name %>,
-                <%= storeData.store_city%>
-        </h2>
-        <p id="address">Address:
-            <%= storeData.store_address %>
-        </p>
-        <p>Phone:
-            <%= storeData.phone %>
-        </p>
-        <% if(storeData.senior_hour_note !== null) { %>
-            <h4>Dedicated hours for seniors and people with disabilities:
-                <%= storeData.senior_hour_note %>
-            </h4>
+        <br>
+        <a id="return" href="marketlist.ejs">Return to market list</a>
+        <div class="data">
+            <h2 id="store">
+                <%= storeData.store_name %>,
+                    <%= storeData.store_city%>
+            </h2>
+            <div id="storeInfo">
+                <p><b id="address">Address:</b>
+                    <%= storeData.store_address %>
+                </p>
+                <p><b id="phone">Phone:</b>
+                    <%= storeData.phone %>
+                </p>
+                <% if(storeData.senior_hour_note !== null) { %>
+                    <p><b id="senior">Hours for seniors / disabilities:</b></p>
+                    <p>
+                        <%= storeData.senior_hour_note %>
+                    </p>
 
-            <% } else { %>
-                <h4>Unfortunately, there is no known dedicated hours for seniors and people with disabilities.</h4>
-                <% } %>
-                    <h4>Latest wait time:
-                        <%= storeData.wait_time %> min</h4>
+                    <% } else { %>
+                        <p>Unfortunately, there is no known dedicated hours for seniors and people with disabilities.</p>
+                        <% } %>
+                            <p id="latest">Latest wait time: <b id="waitTime">"<%= storeData.wait_time %> min"</b></p>
+            </div>
+        </div>
+        <form action="/storepage.ejs" method="post">
+            <button id="update" type="submit" name="storeid" value="<%= storeData.id %>">Update Time!</button>
+        </form>
+        <div id="map"></div>
 
-                    </div>
-
-                    <div id="map"></div>
-                    <form action="/storepage.ejs" method="post">
-                        <button type="submit" name="storeid" value="<%= storeData.id %>">Update time</button>
-                    </form>
 
     </main>
     <script>
