@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
+body {
+    margin: 0;
+    font-family: 'Galindo', cursive;
+    font-style: normal;
+    font-weight: normal;
+    background-color: lightblue;
+}
+
+#red {
+    color: red;
+}
+
+#orange {
+    color: orange;
+}
+
+.title {
+    font-size: 54px;
+}
+
+main {
+    text-align: center;
+}
+
+button.stores {
+    width: 300px;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 10px;
+    color: #F85C2A;
+}
+
+div.data {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 10px;
+    justify-content: center;
+}
+
+#update {
+    width: 100px;
+}
+
+@media (max-width: 425px) {
+    #map {
+        margin-top: 15px;
+        text-align: center;
+    }
+    iframe {
+        width: 320px;
+        height: 320px;
+        border: none;
+    }
+}
+
+@media (min-width: 426px) and (max-width: 1023px) {
+    #map {
+        margin-top: 15px;
+        text-align: center;
+    }
+    iframe {
+        width: 426px;
+        height: 426px;
+        border: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    #map {
+        margin-top: 15px;
+        text-align: center;
+    }
+    iframe {
+        width: 600px;
+        height: 500px;
+        border: none;
+    }
+}

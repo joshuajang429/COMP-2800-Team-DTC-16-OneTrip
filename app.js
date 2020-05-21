@@ -16,7 +16,6 @@ firebase.initializeApp({
     measurementId: "G-9EVM86CMWZ"
 });
 require("firebase/auth");
-// require("firebase/firestore");
 
 const db = mysql.createPool({
     host: 'sql3.freemysqlhosting.net',
