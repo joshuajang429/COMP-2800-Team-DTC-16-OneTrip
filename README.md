@@ -6,6 +6,7 @@
   - Junhyeok Jang (Joshua) - Term 1
   - Hyungjoon Lee - Term 1 (branch name : hyungjoon)
 
+
 # Overview:
   - Languages used:
     - JavaScript, jQuery and Node.js
@@ -23,6 +24,7 @@
     - Facebook JavaScript SDK
     - Twitter JavaScript SDK
 
+
 # How to Set Up Development Environment:
   - Things to install (in order!):
     - Node.js (npm install node)
@@ -31,7 +33,8 @@
     - MySQL2 (npm install --save mysql2)
     - Firebase (npm install --save firebase)
 
-# Test Documentation:
+
+# Test Documentation (link to 04b Surprise challenge #2b):
   - https://docs.google.com/spreadsheets/d/13F9WWY572YAwF9w1Whuf-_FMPwQUNE0iJEwfUHd--pk/edit#gid=394496370
 
 
@@ -45,3 +48,20 @@
   - Facebook Dev
   - Twitter Dev
   - Bootstrap
+  
+  
+# Additional Notes:
+  - MySQL2(credentials to be used in http://www.phpmyadmin.co/)
+      
+      - host: 'sql3.freemysqlhosting.net'.  
+      - user: 'sql3340725'.  
+      - database: 'sql3340725'.  
+      - password: 'rLfIG2Tz6u.  
+      
+  
+# Detailed Configuration Instruction
+
+      
+   
+ 
+  
