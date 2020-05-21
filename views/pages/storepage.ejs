@@ -85,12 +85,14 @@
                     <%= storeData.store_city%>
             </h2>
             <div id="storeInfo">
-                <p><b id="address">Address:</b>
-                    <%= storeData.store_address %>
-                </p>
-                <p><b id="phone">Phone:</b>
+                <% if(storeData.average_time !== null) { %>
+                    <p><b id="address">Average Wait Time:</b>
+                        <%= storeData.average_time%> min
+                    </p>
+                <% } %>
+                <!-- <p><b id="phone">Phone:</b>
                     <%= storeData.phone %>
-                </p>
+                </p> -->
                 <% if(storeData.senior_hour_note !== null) { %>
                     <p><b id="senior">Hours for seniors / disabilities:</b></p>
                     <p>
@@ -100,7 +102,20 @@
                     <% } else { %>
                         <p>Unfortunately, there is no known dedicated hours for seniors and people with disabilities.</p>
                         <% } %>
-                            <p id="latest">Latest wait time: <b id="waitTime">"<%= storeData.wait_time %> min"</b></p>
+                        <p id="latest">Latest wait time: 
+                            <% if(storeData.wait_time !== null) { %>
+                                <b id="waitTime"><%= storeData.wait_time %> min</b>
+                            <% } else { %>
+                                <b id="waitTime">No updates yet</b>
+                            <% } %>
+                        </p>
+
+                        <% if(storeData.last_updated !== null) { %>
+                            <p id="lastUpdated"></p>
+                            <input id="lastUpdatedHidden" style="display:none" value="<%= storeData.last_updated %>">
+                        <% } else { %>
+                            <input id="lastUpdatedHidden" style="display:none" value="">
+                        <% } %>
             </div>
         </div>
         <form action="/storepage.ejs" method="post">
@@ -110,6 +125,32 @@
 
 
     </main>
+    <script>
+        let lastUpdated = $('#lastUpdatedHidden').val().split(":");
+        console.log($('#lastUpdatedHidden').val());
+        if (lastUpdated != "") {
+            let days = 0;
+            let hours = lastUpdated[0];
+            let minutes = lastUpdated[1];
+            let seconds = lastUpdated[2];
+            if (hours >= 24) {
+                days = Math.floor(hours / 24);
+                hours = hours - (days * 24);
+            }
+            let result = "";
+            if(days > 0) {
+                result = (days === 1) ? "Last Updated Yesterday" : `Last Updated ${days} days ago`;
+            } else if (hours > 0) {
+                result = (hours === 1) ? `Last Updated an hour ago` : `Last Updated ${hours} hours ago`;
+            } else if (minutes > 0) {
+                result = "Last Updated ${days} min ago";
+            } else if (seconds > 0) {
+                result = "Last Updated ${days} sec ago";
+            }
+            document.getElementById("lastUpdated").innerHTML = result;
+        }
+        
+    </script>
     <script>
         //Added map to show where the store is
         let map = document.createElement('iframe');
