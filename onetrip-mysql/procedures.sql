@@ -11,6 +11,19 @@ BEGIN
 END//
 DELIMITER ;
 
+/* 
+Updates a store's wait times as the admin user (user_id = 1). 
+*/
+DROP PROCEDURE IF EXISTS update_time_test;
+DELIMITER //
+
+CREATE PROCEDURE update_time_test(IN storeid INTEGER, IN waittime INTEGER)
+BEGIN
+    INSERT INTO wait_times(user_id, store_id, wait_time)
+    VALUES(1, storeid, waittime);
+END//
+DELIMITER ;
+
 
 /*
 Shows the stores within a given city.
@@ -57,7 +70,7 @@ DELIMITER //
 CREATE PROCEDURE store_info_create_if_doesnt_exist(IN postcode TEXT, IN phonenum TEXT, IN storename TEXT, IN storecity TEXT)
 BEGIN
     IF (SELECT store_exists(postcode, phonenum)) = 1 THEN
-        SELECT latest_wait_time_post_code(postcode) as wait_time, 
+        SELECT latest_wait_time_post_code_phone(postcode, phonenum) as wait_time, 
         get_store_id_post_code_phone_num(postcode, phonenum) as store_id;
     ELSE
         IF (SELECT get_store_id(storename)) IS NULL THEN
@@ -65,7 +78,7 @@ BEGIN
         END IF;
         INSERT INTO stores (store_info_id, phone, store_post_code, store_city)
         VALUES ((SELECT get_store_id(storename)), phonenum, postcode, storecity);
-        SELECT latest_wait_time_post_code(postcode) as wait_time, 
+        SELECT latest_wait_time_post_code_phone(postcode, phonenum) as wait_time, 
         get_store_id_post_code_phone_num(postcode, phonenum) as store_id;
     END IF;
 END//
@@ -211,6 +224,25 @@ BEGIN
 END//
 DELIMITER ;
 
+/*
+Calculates the time difference of the latest wait time for a store with a given store id.
+
+Test: SELECT last_updated(1) as last_updated, latest_wait_time(1) as wait_time;
+Returns: last updated: HHH:MM:SS, wait_time: n
+*/
+DROP FUNCTION IF EXISTS last_updated;
+DELIMITER //
+CREATE FUNCTION last_updated(id INT) 
+RETURNS TIME READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT TIMEDIFF(CURRENT_TIMESTAMP, created)
+      FROM wait_times
+      WHERE wait_times.store_id = id
+      ORDER BY wait_times.created DESC LIMIT 1
+    );
+END //
+DELIMITER ;
 
 /*
 Shows stores info with a given store name.
@@ -242,6 +274,23 @@ BEGIN
 END //
 DELIMITER ;
 
+
+/*
+Returns the latest wait time for a given store with a postal code and phone number.
+*/
+DROP FUNCTION IF EXISTS latest_wait_time_post_code_phone;
+DELIMITER //
+CREATE FUNCTION latest_wait_time_post_code_phone(postCode TEXT, phoneNum TEXT) 
+RETURNS INT READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT wait_time
+      FROM wait_times
+      WHERE wait_times.store_id = (SELECT id FROM stores WHERE store_post_code LIKE postCode AND phone LIKE phoneNum)
+      ORDER BY wait_times.created DESC LIMIT 1
+    );
+END //
+DELIMITER ;
 
 /*
 Calculates the average wait time for a store.
