@@ -53,10 +53,10 @@
 # Additional Notes:
   - MySQL2(credentials to be used in http://www.phpmyadmin.co/)
       
-      -host: 'sql3.freemysqlhosting.net',
-      -user: 'sql3340725',
-      -database: 'sql3340725',
-      -password: 'rLfIG2Tz6u'
+      - host: 'sql3.freemysqlhosting.net'.  
+      - user: 'sql3340725'.  
+      - database: 'sql3340725'.  
+      - password: 'rLfIG2Tz6u.  
       
   
 # Detailed Configuration Instruction
