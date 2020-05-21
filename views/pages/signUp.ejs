@@ -91,13 +91,14 @@
           //     console.log(errorMessage);
           // })
           // });
-          // firebase.auth().onAuthStateChanged(function(user) {
-          //   if(user) {
-          //     window.location.href = "/";
-          //   } else {
-          //     console.log("you are not logged in");
-          //   }
-          // });
+          firebase.auth().onAuthStateChanged(function(user) {
+            if(user) {
+              window.location.href = "/";
+              document.getElementById("login-button").style.display = "none";
+            } else {
+              console.log("you are not logged in");
+            }
+          });
         </script>
       </body>
 </html>

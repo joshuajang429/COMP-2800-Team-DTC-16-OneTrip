@@ -14,6 +14,23 @@
 
     <link rel="stylesheet" type="text/css" href="css/map.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+    <script>
+            var firebaseConfig = {
+              apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
+              authDomain: "onetrip-5349f.firebaseapp.com",
+              databaseURL: "https://onetrip-5349f.firebaseio.com",
+              projectId: "onetrip-5349f",
+              storageBucket: "onetrip-5349f.appspot.com",
+              messagingSenderId: "752676431359",
+              appId: "1:752676431359:web:1be0e9787cb5b10f9ef3ca",
+              measurementId: "G-9EVM86CMWZ"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+          </script>
 
 </head>
 
@@ -43,11 +60,15 @@
         <div class="navbar-collapse collapse order-3 dual-collapse2" id="collapse_target">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" id="auth">
-                    <a class="nav-link" href="signIn.ejs">Log In</a>
+                    <a id="login-button" class="nav-link" href="signIn.ejs">Log In</a>
                 </li>
                 <li class="nav-item" id="auth">
-                    <a class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+                    <a id="signup-button" class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
                 </li>
+                <li class="nav-item" id="auth">
+                        <!-- <a class="nav-link" href="/" id="logout"><span class="glyphicon glyphicon-user"></span>Log Out</a> -->
+                        <span class="nav-link" id="logout">Log Out</span>
+                    </li>
             </ul>
         </div>
     </nav>
@@ -246,6 +267,19 @@
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMN5A6BZM022m3zZ35SsgwJWlTW3SGL4g&libraries=places&callback=initAutocomplete" async defer></script>
+    <script>
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    console.log(user.email);
+                    console.log(user.uid);
+                    document.getElementById("login-button").style.display = "none";
+                    document.getElementById("signup-button").style.display = "none";
+                } else {
+                    console.log("you are not logged in");
+                    document.getElementById("logout").style.display = "none";
+                }
+            });
+        </script>
 </body>
 
 </html>
