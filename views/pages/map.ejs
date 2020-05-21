@@ -14,6 +14,23 @@
 
     <link rel="stylesheet" type="text/css" href="css/map.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+    <script>
+            var firebaseConfig = {
+              apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
+              authDomain: "onetrip-5349f.firebaseapp.com",
+              databaseURL: "https://onetrip-5349f.firebaseio.com",
+              projectId: "onetrip-5349f",
+              storageBucket: "onetrip-5349f.appspot.com",
+              messagingSenderId: "752676431359",
+              appId: "1:752676431359:web:1be0e9787cb5b10f9ef3ca",
+              measurementId: "G-9EVM86CMWZ"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+          </script>
 
 </head>
 
@@ -48,11 +65,15 @@
         <div class="navbar-collapse collapse order-3 dual-collapse2" id="collapse_target">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" id="auth">
-                    <a class="nav-link" href="signIn.ejs">Log In</a>
+                    <a id="login-button" class="nav-link" href="signIn.ejs">Log In</a>
                 </li>
                 <li class="nav-item" id="auth">
-                    <a class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+                    <a id="signup-button" class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
                 </li>
+                <li class="nav-item" id="auth">
+                        <!-- <a class="nav-link" href="/" id="logout"><span class="glyphicon glyphicon-user"></span>Log Out</a> -->
+                        <span class="nav-link" id="logout">Log Out</span>
+                    </li>
             </ul>
         </div>
     </nav>
@@ -102,6 +123,21 @@
 
         // Initialize the variables to be used within the callback function
         let map, service, infoWindow, searchBox;
+
+        function filterStoreName(storename) {
+            switch (storename) {
+                case "Walmart Supercentre":
+                    return "Walmart";
+                case "Real Canadian Superstore":
+                    return "Superstore";
+                case "Costco Wholesale":
+                    return "Costco";
+                case "Whole Foods Market":
+                    return "Whole Foods";
+                default:
+                    return storename;
+            }
+        }
 
         // The callback function that the async defer script calls for
         function initAutocompleteMap() {
@@ -222,12 +258,17 @@
                                     let lastIndex = (place['address_components'].length) - 1;
                                     let postal_Code = place['address_components'][lastIndex]["long_name"].split(' ')
                                     let postalCode = postal_Code[0] + postal_Code[1];
-                                    console.log(vicinity, postalCode);
+                                    let storeName = filterStoreName(place['name']);
+                                    let phoneNum = place['formatted_phone_number'];
+                                    let city = (place['address_components'].length) - 5;
+                                    let storeCity = place['address_components'][city]["long_name"];
+                                    console.log(vicinity, postalCode, storeName, "City:", storeCity, "phone:", phoneNum);
 
-                                    const time_url = `/waittime/${postalCode}`
+                                    const time_url = `/waittime/${postalCode}/${storeName}/${phoneNum}/${storeCity}`
                                     const response = await fetch(time_url);
                                     const json = await response.json();
                                     const waitTime = json.waittime;
+                                    const storeID = json.storeid;
 
                                     infoWindow.open(map, markers[i]);
                                     buildIWContent(place, waitTime, storeID);
@@ -278,6 +319,19 @@
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMN5A6BZM022m3zZ35SsgwJWlTW3SGL4g&libraries=places&callback=initAutocompleteMap" async defer></script>
+    <script>
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    console.log(user.email);
+                    console.log(user.uid);
+                    document.getElementById("login-button").style.display = "none";
+                    document.getElementById("signup-button").style.display = "none";
+                } else {
+                    console.log("you are not logged in");
+                    document.getElementById("logout").style.display = "none";
+                }
+            });
+        </script>
 </body>
 
 </html>
