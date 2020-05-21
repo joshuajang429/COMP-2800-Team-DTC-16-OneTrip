@@ -7,7 +7,7 @@
     <title>One Trip</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/landingPage.css">
 
@@ -16,20 +16,21 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
 
+
     <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
-        authDomain: "onetrip-5349f.firebaseapp.com",
-        databaseURL: "https://onetrip-5349f.firebaseio.com",
-        projectId: "onetrip-5349f",
-        storageBucket: "onetrip-5349f.appspot.com",
-        messagingSenderId: "752676431359",
-        appId: "1:752676431359:web:1be0e9787cb5b10f9ef3ca",
-        measurementId: "G-9EVM86CMWZ"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
+            authDomain: "onetrip-5349f.firebaseapp.com",
+            databaseURL: "https://onetrip-5349f.firebaseio.com",
+            projectId: "onetrip-5349f",
+            storageBucket: "onetrip-5349f.appspot.com",
+            messagingSenderId: "752676431359",
+            appId: "1:752676431359:web:1be0e9787cb5b10f9ef3ca",
+            measurementId: "G-9EVM86CMWZ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
     </script>
 </head>
 
@@ -44,7 +45,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapse_target">
-            
+
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -57,13 +58,17 @@
                 </li>
             </ul>
         </div>
-        <div class="navbar-collapse collapse order-3 dual-collapse2" id="collapse_target" >
+        <div class="navbar-collapse collapse order-3 dual-collapse2" id="collapse_target">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" id="auth">
-                    <a class="nav-link" href="signIn.ejs">Log In</a>
+                    <a id="login-button" class="nav-link" href="signIn.ejs">Log In</a>
                 </li>
                 <li class="nav-item" id="auth">
-                    <a class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+                    <a id="signup-button" class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+                </li>
+                <li class="nav-item" id="auth">
+                    <!-- <a class="nav-link" href="/" id="logout"><span class="glyphicon glyphicon-user"></span>Log Out</a> -->
+                    <span class="nav-link" id="logout">Log Out</span>
                 </li>
             </ul>
         </div>
@@ -77,15 +82,15 @@
                     <span class="title" id="red">One</span> <span class="title" id="orange">Trip</span>
                     <br>
                     <img id="logo" src="assets/onetrip_logo_large.png">
-                    <a href="map.ejs"><h1>Get Started!</h1></a>
+                    <a href="map.ejs">
+                        <h1>Get Started!</h1>
+                    </a>
                 </div>
                 <div class="col-lg" style="text-align: center; margin: 50px auto">
                     <h2>Welcome to OneTrip,</h2>
                     <p>the time checking app that will reduce </br> your wait time for shopping groceries!</p>
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/WG0TPJcRAPo" 
-                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen></iframe>
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/WG0TPJcRAPo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -98,9 +103,8 @@
                 <div class="col-lg" style="text-align: center; margin: 50px auto">
                     <h2>The Goals</h2>
                     <br>
-                    <p>During this unprecedented time of COVID-19 pandemic, we realize the struggle of having to wait
-                        long line-ups to get our essentials. We created OneTrip to help people finish
-                        their grocery shopping in one quick go, reducing the time spent outdoors during this season.
+                    <p>During this unprecedented time of COVID-19 pandemic, we realize the struggle of having to wait long line-ups to get our essentials. We created OneTrip to help people finish their grocery shopping in one quick go, reducing the time
+                        spent outdoors during this season.
                     </p>
                     <img class="img-fluid" src="images/shopping.jpg">
                 </div>
@@ -116,12 +120,12 @@
                         <img class="img-fluid w-25" src="images/onetrip1.jpg">
                         <img class="img-fluid w-25" src="images/onetrip2.jpg">
                     </div>
-                        
+
                 </div>
             </div>
         </div>
     </section>
-    
+
     <section class="about" id="about">
         <div style="text-align: center; margin: 50px auto">
             <h2>About Us</h2>
@@ -129,17 +133,13 @@
                 <div class="row">
                     <div class="col-lg">
                         <p>
-                            Before the COVID-19 pandemic, the only times we would line up in front of stores would be early mornings of
-                            Black Friday and Boxing Day. However, we are now expected to line up for a loaf of bread and our favorite fruits.
-                            OneTrip, created by DTC-16, is a shopping-helper that shows the estimated wait time of stores for the users, which
-                            the users can also update as well. We, the members of DTC-16, believe grocery shopping should be easy and quick,
-                            with minimum interaction and waiting outdoors.
+                            Before the COVID-19 pandemic, the only times we would line up in front of stores would be early mornings of Black Friday and Boxing Day. However, we are now expected to line up for a loaf of bread and our favorite fruits. OneTrip, created by DTC-16, is
+                            a shopping-helper that shows the estimated wait time of stores for the users, which the users can also update as well. We, the members of DTC-16, believe grocery shopping should be easy and quick, with minimum interaction and
+                            waiting outdoors.
                         </p>
                         <p>
-                            DTC-16 is represented by Diyar Ravandi, Joshua Jang, Marlon Fajardo and Hyung Joon Lee. 
-                            We believe in hard work and prosperity. Our team is built on teamwork and encouraging one another. 
-                            If any problems arise in the group, we condone meetings and get to the root of the problem in a peaceful way. 
-                            We all leave our egos at the door and do what is best for the team.
+                            DTC-16 is represented by Diyar Ravandi, Joshua Jang, Marlon Fajardo and Hyung Joon Lee. We believe in hard work and prosperity. Our team is built on teamwork and encouraging one another. If any problems arise in the group, we condone meetings and get
+                            to the root of the problem in a peaceful way. We all leave our egos at the door and do what is best for the team.
                         </p>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
         </div>
         <div class="container">
             <h2>DTC-16</h2>
-            <div class="row" >
+            <div class="row">
                 <div class="col-lg" id="member-intro">
                     <img src="images/sexyguy.png">
                     <p>Fajardo, Marlon</p>
@@ -169,8 +169,7 @@
                     <p>Lee, Hyungjoon</p>
                     <p>Hyungjoon Lee is a BCIT CST Term 1 student.</p>
                     <br>
-                    <p>Interesting Fact: In the past, Hyungjoon bought $5 lottery ticket every week for 5 years,
-                        but never won more than $5 for each ticket!
+                    <p>Interesting Fact: In the past, Hyungjoon bought $5 lottery ticket every week for 5 years, but never won more than $5 for each ticket!
                     </p>
                 </div>
                 <div class="col-lg" id="member-intro">
@@ -183,14 +182,20 @@
             </div>
         </div>
     </section>
+    <script src="script/auth.js"></script>
     <script>
-    firebase.auth().onAuthStateChanged(function(user) {
-        if(user) {
-          console.log(user.email);
-        } else {
-          console.log("you are not logged in");
-        }
-      });
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                console.log(user.email);
+                console.log(user.uid);
+                document.getElementById("login-button").style.display = "none";
+                document.getElementById("signup-button").style.display = "none";
+            } else {
+                console.log("you are not logged in");
+                document.getElementById("logout").style.display = "none";
+            }
+        });
     </script>
 </body>
+
 </html>

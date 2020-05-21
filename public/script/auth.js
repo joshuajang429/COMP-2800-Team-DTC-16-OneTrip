@@ -26,22 +26,47 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 //         console.log("user has signed in");
 
 //     });
- 
 // })
 
-// $('#signin-btn').click(function() {
+$('#signup-btn').click(function() {
+    var email = $("#inputEmail").val();
+    var password = $("#inputPassword").val();
+    var confirmPassword = $("#inputConfirmPassword").val();
+    console.log("email: " + email + ", password: " + password);
+
     
-//     var email = $("#inputEmail").val();
-//     var password = $("#inputPassword").val();
-//     console.log("email: " + email + ", password: " + password);
-//     // var result = firebase.auth().signInWithEmailAndPassword(email, password);
-//     // result.catch(function(error) {
-//     //     var errorCode = error.code;
-//     //     var errorMessage = error.message;
-//     //     console.log(errorCode);
-//     //     console.log(errorMessage);
-//     // })
-// });
+    if(password == confirmPassword) {
+        var result = firebase.auth().createUserWithEmailAndPassword(email, password);
+        result.catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log(errorCode);
+            console.log(errorMessage);
+        })
+    }
+    
+    else{
+        window.alert("Passwords do not match");
+    }
+});
+
+$('#signin-btn').click(function() {
+    var email = $("#inputEmail").val();
+    var password = $("#inputPassword").val();
+    // console.log("email: " + email + ", password: " + password);
+    var result = firebase.auth().signInWithEmailAndPassword(email, password);
+    result.catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+    })
+});
+
+$("#logout").click(function(){
+    firebase.auth().signOut();
+    window.location.replace("/");
+})
 
 // const loginForm = document.getElementById('#form-signin');
 // loginForm.addEventListener('submit', (e) => {
@@ -58,6 +83,4 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 //         console.log("user has signed in");
 //         window.location.href = "/";
 // });
- 
 // })
-

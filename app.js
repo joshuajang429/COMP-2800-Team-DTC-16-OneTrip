@@ -1,4 +1,10 @@
-var firebase = require("firebase/app");
+const express = require("express");
+const app = express();
+const mysql = require("mysql2");
+const path = require("path");
+const PORT = process.env.PORT || 3000;
+
+const firebase = require("firebase/app");
 firebase.initializeApp({
     apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
     authDomain: "onetrip-5349f.firebaseapp.com",
@@ -10,12 +16,7 @@ firebase.initializeApp({
     measurementId: "G-9EVM86CMWZ"
 });
 require("firebase/auth");
-require("firebase/firestore");
-const express = require("express");
-const app = express();
-const mysql = require("mysql2");
-const path = require("path");
-const PORT = process.env.PORT || 3000;
+// require("firebase/firestore");
 
 const db = mysql.createPool({
     host: 'sql3.freemysqlhosting.net',
@@ -66,48 +67,36 @@ app.get("/storepage.ejs", (req, res) => {
 
 //-----Getting waittime from db-------//
 
-let fake_db = { ChIJOYsF8jt4hlQRDjdIUr1JI2o: 30 }
-
-app.get("/waittime/:postalCode", async(req, res) => {
-    const placeId = req.params.postalCode.split(',');
-    const postalCode = placeId[0];
-
-    db.execute(`SELECT latest_wait_time_post_code('${postalCode}') as wait_time`).
+app.get("/waittime/:postalCode/:storeName/:phoneNum/:storeCity", async(req, res) => {
+    // const placeId = req.params.postalCode.split(',');
+    const postalCode = req.params.postalCode;
+    const phoneNum = req.params.phoneNum;
+    const storeName = req.params.storeName;
+    const storeCity = req.params.storeCity;
+    db.execute(`CALL store_info_create_if_doesnt_exist('${postalCode}', '${phoneNum}', '${storeName}', '${storeCity}')`).
     then(([Data, Metadata]) => {
-        let waitTime = Data[0]['wait_time'];
+        let waitTime = Data[0][0]['wait_time'];
+        let storeID = Data[0][0]['store_id']
 
-        if (waitTime != null) {
+        if (waitTime != null && storeID != null) {
             const data = {
-                waittime: waitTime
+                waittime: waitTime,
+                storeid: storeID
             }
             res.json(data);
         } else {
             const data = {
-                waittime: "N/A"
+                waittime: "N/A",
+                storeid: storeID
             }
             res.json(data);
         }
     }).
     catch(error => console.log(error))
-
-    // if (postalCode) {
-    //     const waittime = fake_db[id];
-
-    //     const data = {
-    //         waittime: waittime
-    //     }
-    //     res.json(data);
-    // } else {
-    //     const data = {
-    //         waittime: "N/A"
-    //     }
-    //     res.json(data);
-    // }
 });
 
 app.get("/update.ejs", (req, res) => {
     let storeid = req.query.storeid;
-    console.log(storeid + "KLJHKJ");
     db.execute(`CALL get_store_info_with_id(${storeid})`).
     then(([Data, Metadata]) => {
         console.log(Data[0]);
@@ -115,9 +104,6 @@ app.get("/update.ejs", (req, res) => {
     }).
     catch(error => console.log(error))
 });
-
-
-
 
 //------Posting-------//
 
