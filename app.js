@@ -67,14 +67,16 @@ app.get("/storepage.ejs", (req, res) => {
 
 //-----Getting waittime from db-------//
 
-app.get("/waittime/:postalCode", async(req, res) => {
-    const placeId = req.params.postalCode.split(',');
-    const postalCode = placeId[0];
-
-    db.execute(`SELECT latest_wait_time_post_code('${postalCode}') as wait_time, get_store_id_with_post_code('${postalCode}') as store_id`).
+app.get("/waittime/:postalCode/:storeName/:phoneNum/:storeCity", async(req, res) => {
+    // const placeId = req.params.postalCode.split(',');
+    const postalCode = req.params.postalCode;
+    const phoneNum = req.params.phoneNum;
+    const storeName = req.params.storeName;
+    const storeCity = req.params.storeCity;
+    db.execute(`CALL store_info_create_if_doesnt_exist('${postalCode}', '${phoneNum}', '${storeName}', '${storeCity}')`).
     then(([Data, Metadata]) => {
-        let waitTime = Data[0]['wait_time'];
-        let storeID = Data[0]['store_id']
+        let waitTime = Data[0][0]['wait_time'];
+        let storeID = Data[0][0]['store_id']
 
         if (waitTime != null && storeID != null) {
             const data = {
@@ -85,7 +87,7 @@ app.get("/waittime/:postalCode", async(req, res) => {
         } else {
             const data = {
                 waittime: "N/A",
-                storeid: 0
+                storeid: storeID
             }
             res.json(data);
         }

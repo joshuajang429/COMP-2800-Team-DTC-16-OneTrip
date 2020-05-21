@@ -91,6 +91,21 @@
     <script>
         var map, service, infoWindow;
 
+        function filterStoreName(storename) {
+            switch (storename) {
+                case "Walmart Supercentre":
+                    return "Walmart";
+                case "Real Canadian Superstore":
+                    return "Superstore";
+                case "Costco Wholesale":
+                    return "Costco";
+                case "Whole Foods Market":
+                    return "Whole Foods";
+                default:
+                    return storename;
+            }
+        }
+
         function initAutocomplete() {
 
             if ('geolocation' in navigator) {
@@ -192,9 +207,13 @@
                                     let lastIndex = (place['address_components'].length) - 1;
                                     let postal_Code = place['address_components'][lastIndex]["long_name"].split(' ')
                                     let postalCode = postal_Code[0] + postal_Code[1];
-                                    console.log(vicinity, postalCode);
+                                    let storeName = filterStoreName(place['name']);
+                                    let phoneNum = place['formatted_phone_number'];
+                                    let city = (place['address_components'].length) - 5;
+                                    let storeCity = place['address_components'][city]["long_name"];
+                                    console.log(vicinity, postalCode, storeName, "City:", storeCity, "phone:", phoneNum);
 
-                                    const time_url = `/waittime/${postalCode}`
+                                    const time_url = `/waittime/${postalCode}/${storeName}/${phoneNum}/${storeCity}`
                                     const response = await fetch(time_url);
                                     const json = await response.json();
                                     // console.log(json);
