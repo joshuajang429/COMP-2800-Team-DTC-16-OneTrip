@@ -34,6 +34,35 @@
 </head>
 
 <body>
+    <!-- JavaScript SDK for FB share button -->
+    <div id="fb-root"></div>
+    <script async defer>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+
+            return t;
+        }(document, "script", "twitter-wjs"));
+    </script>
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <a class="navbar-brand" href="#">
@@ -80,6 +109,14 @@
                     <a href="map.ejs">
                         <h1>Get Started!</h1>
                     </a>
+                    <!-- Share Buttons -->
+                    <div class="fb-share-button" data-href="https://onetrip.now.sh/" data-layout="button_count" data-size="large">
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fonetrip.now.sh%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                    </div>
+                    <div>
+                        <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20app&url=https://onetrip.now.sh/" data-size="large">Tweet</a>
+                    </div>
+
                 </div>
                 <div class="col-lg" style="text-align: center; margin: 50px auto">
                     <h2>Welcome to OneTrip,</h2>
