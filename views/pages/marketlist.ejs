@@ -56,23 +56,11 @@
     </nav>
     <main>
         <div class="title-form-block">
-            <h2 id="nearByStores">Nearby Stores</h2>
-            <form class="pure-form" action="/marketlist.ejs" method="post">
+            <h2 id="nearByStores">?!?Easter Egg?!?</h2>
+            <form class="pure-form">
                 <input id="inputBox" type="text" id="search" placeholder="Enter a store name" name="storename">
                 <button id="searchButton" type="submit">Search!</button>
             </form>
-        </div>
-        <div class="data">
-            <% if (result !== null) { %>
-                <% for (var item of result) { %>
-                    <div class="store-button">
-                        <button class="stores" id='<%= item.id %>' onclick=redirect(id)>
-                            <h4><%= item.store_name %>, <%= item.store_city%></h4>
-                            <h5 id="waitTime">Wait: <%= item.wait_time %> min</h5>
-                        </button>
-                    </div>
-                    <% } %>
-                        <% } %>
         </div>
 
         <a href="map.ejs">
@@ -81,13 +69,7 @@
     </main>
 
     <img src="assets/easteregg.gif" id="easteregg" style="visibility:hidden">
-    <script src="script/marketlist.js"></script>
     <script>
-        function redirect(id) {
-            window.location.replace(`/storepage.ejs?storeid=${id}`);
-            // window.location.replace(`https://onetrip.now.sh/storepage.ejs?storeid=${id}`);
-        }
-
         let search = document.getElementById('inputBox');
 
         document.querySelector('form.pure-form').addEventListener('submit', function(e) {

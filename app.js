@@ -104,16 +104,6 @@ app.get("/update.ejs", (req, res) => {
 
 //------Posting-------//
 
-app.post("/marketlist.ejs", (req, res) => {
-    let input = req.body.storename;
-    db.execute(`CALL get_store_info('${input}')`).
-    then(([Data, Metadata]) => {
-        console.log(Data[0]);
-        res.render("pages/marketlist", { result: Data[0] });
-    }).
-    catch(error => console.log(error))
-})
-
 app.post("/storepage.ejs", (req, res) => {
     let storeid = req.body.storeid;
     console.log(storeid);
