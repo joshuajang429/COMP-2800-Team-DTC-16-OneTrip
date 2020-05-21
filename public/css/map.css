@@ -22,7 +22,7 @@ body {
 
 @media (max-width: 425px) {
     #mapDiv {
-        margin-top: 15px;
+        margin-top: 30px;
         text-align: center;
     }
     iframe {
@@ -38,12 +38,32 @@ body {
         height: 30%;
         z-index: 1;
     }
+    h2 {
+        margin-top: 20px;
+    }
+    #pac-input {
+        height: 40px;
+        width: 75%;
+        font-size: 20px;
+    }
 }
 
 @media (min-width: 426px) and (max-width: 1023px) {
     #mapDiv {
         margin-top: 15px;
         text-align: center;
+    }
+    h2 {
+        margin-top: 30px;
+        font-size: 50px;
+    }
+    #pac-input {
+        height: 60px;
+        width: 75%;
+        font-size: 30px;
+    }
+    #waitTimes {
+        font-size: 35px;
     }
 }
 
@@ -54,6 +74,18 @@ body {
         margin-top: 15px;
         text-align: center;
     }
+    h2 {
+        margin-top: 30px;
+        font-size: 50px
+    }
+    #pac-input {
+        height: 60px;
+        width: 75%;
+        font-size: 40px;
+    }
+    #waitTimes {
+        font-size: 40px;
+    }
 }
 
 
@@ -62,8 +94,10 @@ body {
 
 #map {
     margin: auto;
-    height: 75%;
-    width: 75%
+    height: 60%;
+    width: 75%;
+    margin-top: 15px;
+    margin-bottom: 20px;
 }
 
 
@@ -124,12 +158,10 @@ body {
 #pac-input {
     background-color: #fff;
     font-family: Roboto;
-    font-size: 15px;
     font-weight: 300;
-    margin-left: 12px;
     padding: 0 11px 0 13px;
     text-overflow: ellipsis;
-    width: 400px;
+    border: 2px solid black;
 }
 
 #pac-input:focus {

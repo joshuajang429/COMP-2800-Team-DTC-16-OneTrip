@@ -44,9 +44,7 @@
             grid-row-gap: 10px;
             justify-content: center;
         }
-        #update {
-            width: 100px;
-        }
+        
         @media (max-width: 425px) {
             #map {
                 margin-top: 15px;
@@ -56,6 +54,44 @@
                 width: 320px;
                 height: 320px;
                 border: none;
+            }
+            #catlogo {
+                position: absolute;
+                top: 55%;
+                left: 25%
+            }
+            #bubble {
+                position: absolute;
+                top: 100px;
+                left: 7%;
+                width: 85%;
+                height: 40%;
+            }
+            #text {
+                position: absolute;
+                padding-left: 13%;
+                padding-right: 13%;
+                font-size: 6vw;
+                top: 24%;
+            }
+            #input {
+                width: 100px;
+                border: 2px dotted red;
+                text-align: center;
+                padding-left: 5px;
+                line-height: 10px;
+            }
+            #update {
+                position: absolute;
+                top: 91%;
+                left: 26%;
+                background: #97FFC1;
+                color: white;
+                width: 50%;
+                height: 50px;
+                font-size: 30px;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 10px;
             }
         }
         @media (min-width: 426px) and (max-width: 1023px) {
@@ -68,6 +104,46 @@
                 height: 426px;
                 border: none;
             }
+            #catlogo {
+                position: absolute;
+                width: 30%;
+                height: 30%;
+                top: 55%;
+                left: 35%
+            }
+            #bubble {
+                position: absolute;
+                top: 130px;
+                left: 7%;
+                width: 85%;
+                height: 40%;
+            }
+            #text {
+                position: absolute;
+                padding-left: 13%;
+                padding-right: 13%;
+                font-size: 4vw;
+                top: 24%;
+            }
+            #input {
+                width: 200px;
+                text-align: center;
+                border: 2px dotted red;
+                padding-left: 5px;
+                line-height: 10px;
+            }
+            #update {
+                position: absolute;
+                top: 89%;
+                left: 26%;
+                background: #97FFC1;
+                color: white;
+                width: 50%;
+                height: 70px;
+                font-size: 30px;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 10px;
+            }
         }
         @media (min-width: 1024px) {
             #map {
@@ -78,6 +154,46 @@
                 width: 600px;
                 height: 500px;
                 border: none;
+            }
+            #catlogo {
+                position: absolute;
+                width: 30%;
+                height: 30%;
+                top: 55%;
+                left: 35%
+            }
+            #bubble {
+                position: absolute;
+                top: 130px;
+                left: 25%;
+                width: 51%;
+                height: 40%;
+            }
+            #text {
+                position: absolute;
+                width: 40%;
+                left: 30%;
+                font-size: 35px;
+                top:24%;
+            }
+            #input {
+                width: 200px;
+                text-align: center;
+                border: 2px dotted red;
+                padding-left: 5px;
+                line-height: 10px;
+            }
+            #update {
+                position: absolute;
+                top: 89%;
+                left: 32%;
+                background: #97FFC1;
+                color: white;
+                width: 35%;
+                height: 70px;
+                font-size: 30px;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 10px;
             }
         }
     </style>
@@ -119,12 +235,18 @@
         </div>
     </nav>
     <main>
-        <form action="/update.ejs" method="post">
-            <span>How long did you wait to enter <%= storeData.store_name %>?</span>
-            <input type="text" name="wait_time" placeholder="Ex. 20" size="4">
-            <span>Minutes</span>
-            <button type="submit" name="store" value="<%= storeData.id %>">Update</button>
-        </form>
+        <img id="catlogo" src="assets/onetrip_logo_large.png">
+        <img id="bubble" src="assets/bubble.png">
+        
+            <form action="/update.ejs" method="post">
+                <div id="text">
+                    <p>How long did you wait to enter <%= storeData.store_name %>?</p>
+                    <input id="input" type="text" name="wait_time" placeholder="Ex. 20" size="4">
+                    <span>Minutes</span>
+                </div>
+                    <button id="update" type="submit" name="store" value="<%= storeData.id %>">Update</button>
+            </form>
+        </div>
         
     </main>
     <script>
