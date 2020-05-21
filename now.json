@@ -1,11 +1,11 @@
 {
     "version": 2,
     "builds": [
-        {"src": "public/*", "use": "@now/static"},
-        {"src": "views/*", "use": "@now/static"},
-        {"src": "app.js", "use": "@now/node-server"}
+        { "src": "public/*", "use": "@now/static" },
+        { "src": "views/*", "use": "@now/static" },
+        { "src": "app.js", "use": "@now/node-server" }
     ],
     "routes": [
-        {"src": "/(.*)", "dest": "/app.js"}
+        { "src": "/(.*)", "dest": "/app.js" }
     ]
 }
