@@ -16,6 +16,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
 
+
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -64,6 +65,10 @@
                 </li>
                 <li class="nav-item" id="auth">
                     <a class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+                </li>
+                <li class="nav-item" id="auth">
+                    <!-- <a class="nav-link" href="/" id="logout"><span class="glyphicon glyphicon-user"></span>Log Out</a> -->
+                    <span class="nav-link" id="logout">Log Out</span>
                 </li>
             </ul>
         </div>
@@ -177,6 +182,7 @@
             </div>
         </div>
     </section>
+    <script src="script/auth.js"></script>
     <script>
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {

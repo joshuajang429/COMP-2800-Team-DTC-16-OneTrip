@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/signUp.css">
     <link rel="shortcut icon" type="image/png" href="assets/onetrip_logo_small.png">
@@ -65,7 +66,7 @@
                       <label for="inputConfirmPassword">Confirm password</label>
                     </div>
       
-                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" id="signup-btn">Register</button>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" id="signup-btn">Register</button>
                     <a href="signIn.ejs" class="d-block text-center mt-2 small">Already have an account?</a>
                     <hr class="my-4">
                     <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
@@ -77,5 +78,26 @@
           </div>
         </div>
         <script src="script/auth.js"></script>
+
+        <script> 
+          // $('#signin-btn').click(function() {
+          // var email = $("#inputEmail").val();
+          // var password = $("#inputPassword").val();
+          // var result = firebase.auth().signInWithEmailAndPassword(email, password);
+          // result.catch(function(error) {
+          //     var errorCode = error.code;
+          //     var errorMessage = error.message;
+          //     console.log(errorCode);
+          //     console.log(errorMessage);
+          // })
+          // });
+          // firebase.auth().onAuthStateChanged(function(user) {
+          //   if(user) {
+          //     window.location.href = "/";
+          //   } else {
+          //     console.log("you are not logged in");
+          //   }
+          // });
+        </script>
       </body>
 </html>
