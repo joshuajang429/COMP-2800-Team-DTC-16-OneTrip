@@ -90,6 +90,13 @@
     </main>
 
     <img src="assets/easteregg.gif" id="easteregg" style="visibility:hidden">
+    <script id="LogoutScript">
+        // Adds functionality to the log out button
+        $("#logout").click(function(){
+        firebase.auth().signOut();
+        window.location.replace("/");
+        });
+    </script>
     <script>
         let search = document.getElementById('inputBox');
 

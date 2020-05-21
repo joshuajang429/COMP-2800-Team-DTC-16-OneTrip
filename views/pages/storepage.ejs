@@ -125,9 +125,9 @@
 
 
     </main>
-    <script>
+    <script id="LastUpdatedScript">
+        // This script block adjusts what is displayed in the "last updated" section
         let lastUpdated = $('#lastUpdatedHidden').val().split(":");
-        console.log($('#lastUpdatedHidden').val());
         if (lastUpdated != "") {
             let days = 0;
             let hours = lastUpdated[0];
@@ -136,7 +136,7 @@
             if (hours >= 24) {
                 days = Math.floor(hours / 24);
                 hours = hours - (days * 24);
-            }
+            }   
             let result = "";
             if(days > 0) {
                 result = (days === 1) ? "Last Updated Yesterday" : `Last Updated ${days} days ago`;
@@ -149,7 +149,13 @@
             }
             document.getElementById("lastUpdated").innerHTML = result;
         }
-        
+    </script>
+    <script id="LogoutScript">
+        // Adds functionality to the log out button
+        $("#logout").click(function(){
+        firebase.auth().signOut();
+        window.location.replace("/");
+        });
     </script>
     <script>
         //Added map to show where the store is
@@ -173,6 +179,10 @@
         })
     </script>
     <script>
+        function printLoginWindow() {
+            window.alert("Please Login to update the wait time");
+        }
+
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 console.log(user.email);
@@ -180,6 +190,8 @@
                 document.getElementById("login-button").style.display = "none";
                 document.getElementById("signup-button").style.display = "none";
             } else {
+                document.getElementById("update").type = "button";
+                document.getElementById("update").onclick = printLoginWindow;
                 console.log("you are not logged in");
                 document.getElementById("logout").style.display = "none";
             }
