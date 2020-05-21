@@ -18,20 +18,43 @@ BEGIN
 END//
 DELIMITER ;
 
-
--- DROP PROCEDURE IF EXISTS show_wait_times;
--- DELIMITER //
-
--- CREATE PROCEDURE show_wait_times(IN id INTEGER)
--- BEGIN
---     SELECT  FROM stores
---     WHERE senior_time_start IS NOT NULL
---     AND senior_time_end IS NOT NULL;
--- END//
-
--- DELIMITER ;
+DROP PROCEDURE IF EXISTS show_senior_times;
+DELIMITER //
+CREATE PROCEDURE show_senior_times()
+BEGIN
+    SELECT store_name, store_address, senior_time_start, senior_time_end FROM stores
+    WHERE senior_time_start IS NOT NULL
+    AND senior_time_end IS NOT NULL;
+END//
+DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS store_info_create_if_doesnt_exist;
+DELIMITER //
+CREATE PROCEDURE store_info_create_if_doesnt_exist(IN postcode TEXT, IN phonenum TEXT, IN storename TEXT, IN storecity TEXT)
+BEGIN
+    IF (SELECT store_exists(postcode, phonenum)) = 0 THEN
+        INSERT INTO stores (store_info_id, phone, store_post_code, store_city)
+        VALUES ((SELECT get_store_id(storename)), phonenum, postcode, storecity)
+    END IF;
+
+    SELECT latest_wait_time_post_code(postcode) as wait_time, 
+        get_store_id_with_post_code(postcode) as store_id;
+END//
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS store_exists;
+DELIMITER //
+CREATE FUNCTION store_exists(post_code TEXT, phone_num TEXT) 
+RETURNS INT READS SQL DATA
+BEGIN
+    RETURN (
+      SELECT 1
+      FROM stores
+      WHERE phone LIKE phone_num AND store_post_code LIKE post_code
+    );
+END //
+DELIMITER ;
 
 DROP PROCEDURE IF EXISTS show_senior_times;
 DELIMITER //
@@ -58,7 +81,7 @@ DELIMITER ;
 
 DROP FUNCTION IF EXISTS get_store_id_with_post_code;
 DELIMITER //
-CREATE FUNCTION get_store_id(postcode TEXT) 
+CREATE FUNCTION get_store_id_with_post_code(postcode TEXT) 
 RETURNS INT READS SQL DATA
 BEGIN
     RETURN (
