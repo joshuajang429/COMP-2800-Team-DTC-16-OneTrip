@@ -71,6 +71,8 @@ CREATE PROCEDURE store_info_create_if_doesnt_exist(IN postcode TEXT, IN phonenum
 BEGIN
     IF (SELECT store_exists(postcode, phonenum)) = 1 THEN
         SELECT latest_wait_time_post_code_phone(postcode, phonenum) as wait_time, 
+        last_updated((SELECT get_store_id_post_code_phone_num(postcode, phonenum))) as last_updated,
+        get_average_time((SELECT get_store_id_post_code_phone_num(postcode, phonenum))) as average_time,
         get_store_id_post_code_phone_num(postcode, phonenum) as store_id;
     ELSE
         IF (SELECT get_store_id(storename)) IS NULL THEN
@@ -79,6 +81,9 @@ BEGIN
         INSERT INTO stores (store_info_id, phone, store_post_code, store_city)
         VALUES ((SELECT get_store_id(storename)), phonenum, postcode, storecity);
         SELECT latest_wait_time_post_code_phone(postcode, phonenum) as wait_time, 
+        get_average_time((SELECT get_store_id_post_code_phone_num(postcode, phonenum))) as average_time,
+        last_updated((SELECT get_store_id_post_code_phone_num(postcode, phonenum))) as last_updated,
+
         get_store_id_post_code_phone_num(postcode, phonenum) as store_id;
     END IF;
 END//
@@ -218,7 +223,10 @@ DROP PROCEDURE IF EXISTS get_store_info_with_id_senior;
 DELIMITER //
 CREATE PROCEDURE get_store_info_with_id_senior(IN storeid INT)
 BEGIN
-    SELECT stores.id, phone, store_address, store_post_code, store_city, store_name, senior_hour_note, latest_wait_time(stores.id) as wait_time 
+    SELECT stores.id, store_city, store_name, senior_hour_note, 
+    latest_wait_time(stores.id) as wait_time,
+    get_average_time(stores.id) as average_time,
+    last_updated(stores.id) as last_updated
     FROM stores JOIN store_info ON store_info_id = store_info.id 
     WHERE stores.id = storeid;
 END//

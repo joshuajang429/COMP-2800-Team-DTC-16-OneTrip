@@ -78,6 +78,7 @@
         <img id="catlogo" src="assets/onetrip_logo_large.png">
         <img id="bubble" src="assets/bubble.png">
 
+        <button id="<%= storeData.id %>" type="button" onclick=redirect(id)>Return to Store Page</button>
         <form action="/update.ejs" method="post">
             <div id="text">
                 <p>How long did you wait to enter
@@ -90,9 +91,17 @@
         </div>
 
     </main>
+    <script id="LogoutScript">
+        // Adds functionality to the log out button
+        $("#logout").click(function(){
+        firebase.auth().signOut();
+        window.location.replace("/");
+        });
+    </script>
     <script>
         function redirect(id) {
-            window.location.replace(`https://onetrip.now.sh/storepage.ejs?storeid=${id}`);
+            window.location.href = `/storepage.ejs?storeid=${id}`;
+            // window.location.replace(`https://onetrip.now.sh`);
         }
     </script>
     <script>
