@@ -56,6 +56,7 @@ DELIMITER ;
 
 /*
 Shows the store waiting time and store id and adds the store to the database if it didn't exist before.
+
 Test:  CALL store_info_create_if_doesnt_exist('V2Y1N5', '(604) 539-8901', 'Costco', 'Langley');
 Returns: store_id: 14, wait_time: 5
 
