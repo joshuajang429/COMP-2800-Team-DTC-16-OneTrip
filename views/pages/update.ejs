@@ -11,10 +11,17 @@
     <link rel="stylesheet" type="text/css" href="css/update.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" type="image/png" href="assets/onetrip_logo_small.png">
+
+    <!--Firebase libraries-->
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+
     <script>
+        // Initializes firebase within the app.
+        // Taken from firebase.google.com/docs/web
+        // Author: Firebase Team
+        // See: https://firebase.google.com/docs/web/setup
         var firebaseConfig = {
             apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
             authDomain: "onetrip-5349f.firebaseapp.com",
@@ -68,7 +75,6 @@
                     <a id="signup-button" class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
                 </li>
                 <li class="nav-item" id="auth">
-                    <!-- <a class="nav-link" href="/" id="logout"><span class="glyphicon glyphicon-user"></span>Log Out</a> -->
                     <span class="nav-link" id="logout">Log Out</span>
                 </li>
             </ul>
@@ -79,6 +85,8 @@
         <img id="bubble" src="assets/bubble.png">
 
         <button id="<%= storeData.id %>" type="button" onclick=redirect(id)>Return to Store Page</button>
+
+        <!--The form that handles the usr input for a store's wait time-->
         <form action="/update.ejs" method="post">
             <div id="text">
                 <p>How long did you wait to enter
@@ -89,26 +97,32 @@
             <button id="update" type="submit" name="store" value="<%= storeData.id %>">Update</button>
         </form>
         </div>
-
     </main>
+
     <script id="LogoutScript">
-        // Adds functionality to the log out button
+        // Adds functionality to the log out button.
+        // Code snippet found on youtube.com
+        // Author: Coding Cafe
+        // See: https://www.youtube.com/watch?v=mBh3HZaC_qo&list=PLxefhmF0pcPmK1c4qQS9wr9Zqdj0x_uLo&index=7
+        // Videotimestamp: 20:51
         $("#logout").click(function(){
         firebase.auth().signOut();
         window.location.replace("/");
         });
     </script>
+
     <script>
+        // Redirects the user to the correct storepage.
         function redirect(id) {
             window.location.href = `/storepage.ejs?storeid=${id}`;
-            // window.location.replace(`https://onetrip.now.sh`);
         }
     </script>
+
     <script>
+        // Determines the actions taken depending on if the user is logged in or signed out.
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 console.log(user.email);
-                console.log(user.uid);
                 document.getElementById("login-button").style.display = "none";
                 document.getElementById("signup-button").style.display = "none";
             } else {
