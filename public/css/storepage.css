@@ -82,7 +82,7 @@ div.data {
         line-height: 1.0;
         margin-bottom: 0;
     }
-    #address,
+    #average,
     #phone {
         color: red;
         font-size: 20px;
@@ -155,7 +155,7 @@ div.data {
         margin-bottom: 0;
         font-size: 20px;
     }
-    #address,
+    #average,
     #phone {
         color: red;
         font-size: 25px;
@@ -227,7 +227,7 @@ div.data {
         margin-bottom: 10px;
         font-size: 20px;
     }
-    #address,
+    #average,
     #phone {
         color: red;
         font-size: 25px;

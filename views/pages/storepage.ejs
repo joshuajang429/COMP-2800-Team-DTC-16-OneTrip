@@ -17,6 +17,10 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
 
     <script>
+        // Initializes firebase within the app.
+        // Taken from firebase.google.com/docs/web
+        // Author: Firebase Team
+        // See: https://firebase.google.com/docs/web/setup
         var firebaseConfig = {
             apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
             authDomain: "onetrip-5349f.firebaseapp.com",
@@ -27,9 +31,15 @@
             appId: "1:752676431359:web:1be0e9787cb5b10f9ef3ca",
             measurementId: "G-9EVM86CMWZ"
         };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig); // Initialize Firebase
 
+        // Sets the mode of persistence the firebase will use.
+        // Taken from firebase.google.com/docs/auth
+        // Author: Firebase Team
+        // See: https://firebase.google.com/docs/auth/web/auth-state-persistence
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL); 
+
+        // Determines the actions taken if user is logged in or signed out.
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 console.log(user.email);
@@ -41,6 +51,11 @@
                 document.getElementById("logout").style.display = "none";
             }
         });
+
+        // Displays a window alert if the user is not logged in.
+        function printLoginWindow() {
+            window.alert("Please Login to update the wait time");
+        }
     </script>
 
 </head>
@@ -82,7 +97,6 @@
                     <a id="signup-button" class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
                 </li>
                 <li class="nav-item" id="auth">
-                    <!-- <a class="nav-link" href="/" id="logout"><span class="glyphicon glyphicon-user"></span>Log Out</a> -->
                     <span class="nav-link" id="logout">Log Out</span>
                 </li>
             </ul>
@@ -91,54 +105,55 @@
     <main>
         <br>
         <a id="return" href="map.ejs">Return to map</a>
+
         <div class="data">
             <h2 id="store">
-                <%= storeData.store_name %>,
-                    <%= storeData.store_city%>
+                <%= storeData.store_name %>, <%= storeData.store_city%>
             </h2>
+
             <div id="storeInfo">
+                <!--This div uses EJS syntax to display dynamic content-->
                 <% if(storeData.average_time !== null) { %>
-                    <p><b id="address">Average Wait Time:</b>
+                    <p><b id="average">Average Wait Time:</b>
                         <%= storeData.average_time%> min
                     </p>
+                <% } %>
+                <!--Senior Hours information-->
+                <% if(storeData.senior_hour_note !== null) { %>
+                    <p><b id="senior">Hours for seniors / disabilities:</b></p>
+                    <p><%= storeData.senior_hour_note %></p>
+                <% } else { %>
+                    <p>Unfortunately, there is no known dedicated hours for seniors and people with disabilities.</p>
+                <% } %>
+                <!--Wait Time-->
+                <p id="latest">Latest wait time:
+                    <% if(storeData.wait_time !== null) { %>
+                        <b id="waitTime"><%= storeData.wait_time %> min</b>
+                    <% } else { %>
+                        <b id="waitTime">No updates yet</b>
                     <% } %>
-                        <!-- <p><b id="phone">Phone:</b>
-                    <%= storeData.phone %>
-                </p> -->
-                        <% if(storeData.senior_hour_note !== null) { %>
-                            <p><b id="senior">Hours for seniors / disabilities:</b></p>
-                            <p>
-                                <%= storeData.senior_hour_note %>
-                            </p>
-
-                            <% } else { %>
-                                <p>Unfortunately, there is no known dedicated hours for seniors and people with disabilities.</p>
-                                <% } %>
-                                    <p id="latest">Latest wait time:
-                                        <% if(storeData.wait_time !== null) { %>
-                                            <b id="waitTime"><%= storeData.wait_time %> min</b>
-                                            <% } else { %>
-                                                <b id="waitTime">No updates yet</b>
-                                                <% } %>
-                                    </p>
-
-                                    <% if(storeData.last_updated !== null) { %>
-                                        <p id="lastUpdated"></p>
-                                        <input id="lastUpdatedHidden" style="display:none" value="<%= storeData.last_updated %>">
-                                        <% } else { %>
-                                            <input id="lastUpdatedHidden" style="display:none" value="">
-                                            <% } %>
+                </p>
+                <!--When the wait time was last updated-->
+                <% if(storeData.last_updated !== null) { %>
+                    <p id="lastUpdated"></p>
+                    <input id="lastUpdatedHidden" style="display:none" value="<%= storeData.last_updated %>">
+                <% } else { %>
+                    <input id="lastUpdatedHidden" style="display:none" value="">
+                <% } %>
             </div>
         </div>
+
+        <!--Redirect to update page-->
         <form action="/storepage.ejs" method="post">
             <button id="update" type="submit" name="storeid" value="<%= storeData.id %>">Update Time!</button>
         </form>
+
+        <!--The map will be generated into this div-->
         <div id="map"></div>
-
-
     </main>
+
     <script id="LastUpdatedScript">
-        // This script block adjusts what is displayed in the "last updated" section
+        // Determines what is displayed in "lastUpdated" depending on the data provided from the NodeJS server.
         let lastUpdated = $('#lastUpdatedHidden').val().split(":");
         if (lastUpdated != "") {
             let days = 0;
@@ -150,6 +165,8 @@
                 hours = hours - (days * 24);
             }
             let result = "";
+
+            // This block of code determines what displays depending on the value of lastUpdated.
             if (days > 0) {
                 result = (days === 1) ? "Last Updated Yesterday" : `Last Updated ${days} days ago`;
             } else if (hours > 0) {
@@ -162,15 +179,21 @@
             document.getElementById("lastUpdated").innerHTML = result;
         }
     </script>
+
     <script id="LogoutScript">
-        // Adds functionality to the log out button
+        // Adds functionality to the log out button.
+        // Code snippet found on youtube.com
+        // Author: Coding Cafe
+        // See: https://www.youtube.com/watch?v=mBh3HZaC_qo&list=PLxefhmF0pcPmK1c4qQS9wr9Zqdj0x_uLo&index=7
+        // Videotimestamp: 20:51
         $("#logout").click(function() {
             firebase.auth().signOut();
             window.location.replace("/");
         });
     </script>
-    <script>
-        // Embed a map to show where the store is
+
+    <script id="GenerateMap">
+        // Embed a map to show where the store is.
         let map = document.createElement('iframe');
         let mapHolder = document.getElementById('map');
         let key = "AIzaSyBMN5A6BZM022m3zZ35SsgwJWlTW3SGL4g"
@@ -188,49 +211,13 @@
             }
         })
     </script>
+
     <script>
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-
-        $('#signup-btn').click(function() {
-            var email = $("#inputEmail").val();
-            var password = $("#inputPassword").val();
-            var confirmPassword = $("#inputConfirmPassword").val();
-            console.log("email: " + email + ", password: " + password);
-
-
-            if (password == confirmPassword) {
-                var result = firebase.auth().createUserWithEmailAndPassword(email, password);
-                result.catch(function(error) {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    console.log(errorCode);
-                    console.log(errorMessage);
-                })
-            } else {
-                window.alert("Passwords do not match");
-            }
-        });
-
-        $('#signin-btn').click(function() {
-            var email = $("#inputEmail").val();
-            var password = $("#inputPassword").val();
-            var result = firebase.auth().signInWithEmailAndPassword(email, password);
-            result.catch(function(error) {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log(errorCode);
-                console.log(errorMessage);
-            })
-        });
-
-        function printLoginWindow() {
-            window.alert("Please Login to update the wait time");
-        }
+        
 
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 console.log(user.email);
-                console.log(user.uid);
                 document.getElementById("login-button").style.display = "none";
                 document.getElementById("signup-button").style.display = "none";
             } else {
