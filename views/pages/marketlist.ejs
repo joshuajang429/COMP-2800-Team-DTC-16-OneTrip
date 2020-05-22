@@ -105,7 +105,12 @@
             if (search.value == "One Trip") {
                 e.preventDefault();
                 document.getElementById("easteregg").style.visibility = 'visible';
-
+                
+                // Special thanks to "dtrooper" (https://jsfiddle.net/dtrooper/AceJJ/) 
+                // Providing Javascript + jQuery code for fireworks
+                // Code was used to implement EasterEgg
+                // Changed firing location, gravity, number of fireworks and speed
+                
                 let SCREEN_WIDTH = window.innerWidth
                 let SCREEN_HEIGHT = window.innerHeight
                 let mousePos = {
