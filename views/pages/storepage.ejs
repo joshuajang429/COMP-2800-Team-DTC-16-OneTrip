@@ -170,9 +170,9 @@
 
             // This block of code determines what displays depending on the value of lastUpdated.
             if (days > 0) {
-                result = (days === 1) ? "Last Updated Yesterday" : `Last Updated ${days} days ago`;
+                result = (days == 1) ? "Last Updated Yesterday" : `Last Updated ${days} days ago`;
             } else if (hours > 0) {
-                result = (hours === 1) ? `Last Updated an hour ago` : `Last Updated ${hours} hours ago`;
+                result = (hours == 1) ? `Last Updated an hour ago` : `Last Updated ${hours} hours ago`;
             } else if (minutes > 0) {
                 result = `Last Updated ${minutes} min ago`;
             } else if (seconds > 0) {
