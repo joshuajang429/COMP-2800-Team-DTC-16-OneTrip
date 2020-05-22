@@ -71,8 +71,9 @@
   - Firebase
   - Facebook Dev
   - Twitter Dev
-  - Bootstrap
-
+  - Bootstrap.  
+  - Figma Dev.  
+  - Jsfiddle
       
    
  
