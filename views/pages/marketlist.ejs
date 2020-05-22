@@ -12,11 +12,32 @@
     <link rel="shortcut icon" type="image/png" href="assets/onetrip_logo_small.png">
 
     <link rel="stylesheet" type="text/css" href="css/marketlist.css">
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
+            authDomain: "onetrip-5349f.firebaseapp.com",
+            databaseURL: "https://onetrip-5349f.firebaseio.com",
+            projectId: "onetrip-5349f",
+            storageBucket: "onetrip-5349f.appspot.com",
+            messagingSenderId: "752676431359",
+            appId: "1:752676431359:web:1be0e9787cb5b10f9ef3ca",
+            measurementId: "G-9EVM86CMWZ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 
 </head>
 
 <body>
-    <!-- NAVBAR -->
+    <!-- 
+        Navbar codes and styling are all referenced from Bootstrap.
+        Authors: Bootstrap Team (team info at: https://github.com/orgs/twbs/people)
+        URL: https://getbootstrap.com/docs/4.0/components/navbar/
+    -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <a class="navbar-brand" href="/">
             <img src="assets/onetrip_logo_small.png" class="d-inline-block align-top" alt="" width="40px" height="40px">
@@ -42,33 +63,25 @@
         <div class="navbar-collapse collapse order-3 dual-collapse2" id="collapse_target">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" id="auth">
-                    <a class="nav-link" href="signIn.ejs">Log In</a>
+                    <a id="login-button" class="nav-link" href="signIn.ejs">Log In</a>
                 </li>
                 <li class="nav-item" id="auth">
-                    <a class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+                    <a id="signup-button" class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+                </li>
+                <li class="nav-item" id="auth">
+                    <!-- <a class="nav-link" href="/" id="logout"><span class="glyphicon glyphicon-user"></span>Log Out</a> -->
+                    <span class="nav-link" id="logout">Log Out</span>
                 </li>
             </ul>
         </div>
     </nav>
     <main>
         <div class="title-form-block">
-            <h2 id="nearByStores">Nearby Stores</h2>
-            <form class="pure-form" action="/marketlist.ejs" method="post">
+            <h2 id="nearByStores">?!?Easter Egg?!?</h2>
+            <form class="pure-form">
                 <input id="inputBox" type="text" id="search" placeholder="Enter a store name" name="storename">
                 <button id="searchButton" type="submit">Search!</button>
             </form>
-        </div>
-        <div class="data">
-            <% if (result !== null) { %>
-                <% for (var item of result) { %>
-                    <div class="store-button">
-                        <button class="stores" id='<%= item.id %>' onclick=redirect(id)>
-                            <h4><%= item.store_name %>, <%= item.store_city%></h4>
-                            <h5 id="waitTime">Wait: <%= item.wait_time %> min</h5>
-                        </button>
-                    </div>
-                    <% } %>
-                        <% } %>
         </div>
 
         <a href="map.ejs">
@@ -77,13 +90,14 @@
     </main>
 
     <img src="assets/easteregg.gif" id="easteregg" style="visibility:hidden">
-    <script src="script/marketlist.js"></script>
+    <script id="LogoutScript">
+        // Adds functionality to the log out button
+        $("#logout").click(function(){
+        firebase.auth().signOut();
+        window.location.replace("/");
+        });
+    </script>
     <script>
-        function redirect(id) {
-            window.location.replace(`/storepage.ejs?storeid=${id}`);
-            // window.location.replace(`https://onetrip.now.sh/storepage.ejs?storeid=${id}`);
-        }
-
         let search = document.getElementById('inputBox');
 
         document.querySelector('form.pure-form').addEventListener('submit', function(e) {
@@ -359,5 +373,18 @@
             }, 7000);
 
         })
+    </script>
+    <script>
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                console.log(user.email);
+                console.log(user.uid);
+                document.getElementById("login-button").style.display = "none";
+                document.getElementById("signup-button").style.display = "none";
+            } else {
+                console.log("you are not logged in");
+                document.getElementById("logout").style.display = "none";
+            }
+        });
     </script>
 </body>

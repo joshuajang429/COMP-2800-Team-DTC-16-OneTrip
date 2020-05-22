@@ -1,90 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store Info Page</title>
 
+    <link rel="stylesheet" href="css/storePage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/storepage.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" type="image/png" href="assets/onetrip_logo_small.png">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Galindo&display=swap');
-        body {
-            margin: 0;
-            font-family: 'Galindo', cursive;
-            font-style: normal;
-            font-weight: normal;
-            background-color: lightblue;
-        }
-        #red {
-            color: red;
-        }
-        #orange {
-            color: orange;
-        }
-        .title {
-            font-size: 54px;
-        }
-        main {
-            text-align: center;
-        }
-        button.stores {
-            width: 300px;
-            background-color: white;
-            border: 3px solid black;
-            border-radius: 10px;
-            color: #F85C2A;
-        }
-        div.data {
-            margin-top: 10px;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-row-gap: 10px;
-            justify-content: center;
-        }
-        #update {
-            width: 100px;
-        }
-        @media (max-width: 425px) {
-            #map {
-                margin-top: 15px;
-                text-align: center;
+
+    <!--Firebase libraries-->
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+
+    <script>
+        // Initializes firebase within the app.
+        // Taken from firebase.google.com/docs/web
+        // Author: Firebase Team
+        // See: https://firebase.google.com/docs/web/setup
+        var firebaseConfig = {
+            apiKey: "AIzaSyCmidJ7Dopj865jlAM7w4Oh6mSvCIGdAJg",
+            authDomain: "onetrip-5349f.firebaseapp.com",
+            databaseURL: "https://onetrip-5349f.firebaseio.com",
+            projectId: "onetrip-5349f",
+            storageBucket: "onetrip-5349f.appspot.com",
+            messagingSenderId: "752676431359",
+            appId: "1:752676431359:web:1be0e9787cb5b10f9ef3ca",
+            measurementId: "G-9EVM86CMWZ"
+        };
+        firebase.initializeApp(firebaseConfig); // Initialize Firebase
+
+        // Sets the mode of persistence the firebase will use.
+        // Taken from firebase.google.com/docs/auth
+        // Author: Firebase Team
+        // See: https://firebase.google.com/docs/auth/web/auth-state-persistence
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL); 
+
+        // Determines the actions taken if user is logged in or signed out.
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                console.log(user.email);
+                console.log(user.uid);
+                document.getElementById("login-button").style.display = "none";
+                document.getElementById("signup-button").style.display = "none";
+            } else {
+                console.log("you are not logged in");
+                document.getElementById("logout").style.display = "none";
             }
-            iframe {
-                width: 320px;
-                height: 320px;
-                border: none;
-            }
+        });
+
+        // Displays a window alert if the user is not logged in.
+        function printLoginWindow() {
+            window.alert("Please Login to update the wait time");
         }
-        @media (min-width: 426px) and (max-width: 1023px) {
-            #map {
-                margin-top: 15px;
-                text-align: center;
-            }
-            iframe {
-                width: 426px;
-                height: 426px;
-                border: none;
-            }
-        }
-        @media (min-width: 1024px) {
-            #map {
-                margin-top: 15px;
-                text-align: center;
-            }
-            iframe {
-                width: 600px;
-                height: 500px;
-                border: none;
-            }
-        }
-    </style>
+    </script>
+
 </head>
 
 <body>
-    <!-- NAVBAR -->
+    <!-- 
+        Navbar codes and styling are all referenced from Bootstrap.
+        Authors: Bootstrap Team (team info at: https://github.com/orgs/twbs/people)
+        URL: https://getbootstrap.com/docs/4.0/components/navbar/
+    -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <a class="navbar-brand" href="/">
             <img src="assets/onetrip_logo_small.png" class="d-inline-block align-top" alt="" width="40px" height="40px">
@@ -94,7 +77,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapse_target">
-            
+
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
@@ -107,59 +90,143 @@
                 </li>
             </ul>
         </div>
-        <div class="navbar-collapse collapse order-3 dual-collapse2" id="collapse_target" >
+        <div class="navbar-collapse collapse order-3 dual-collapse2" id="collapse_target">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" id="auth">
-                    <a class="nav-link" href="signIn.ejs">Log In</a>
+                    <a id="login-button" class="nav-link" href="signIn.ejs">Log In</a>
                 </li>
                 <li class="nav-item" id="auth">
-                    <a class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+                    <a id="signup-button" class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+                </li>
+                <li class="nav-item" id="auth">
+                    <span class="nav-link" id="logout">Log Out</span>
                 </li>
             </ul>
         </div>
     </nav>
     <main>
-        <div class="data"></div>
-            <a href="marketlist.ejs">Return to market list</a>
-            <h2 id="store"><%= storeData.store_name %>, <%= storeData.store_city%></h2>
-            <p id="address">Address: <%= storeData.store_address %></p>
-            <p>Phone: <%= storeData.phone %></p>
-            <% if(storeData.senior_hour_note !== null) { %>
-                <h4>Dedicated hours for seniors and people with disabilities: <%= storeData.senior_hour_note %></h4>
+        <br>
+        <a id="return" href="map.ejs">Return to map</a>
 
-            <% } else { %>
-                <h4>Unfortunately, there is no known dedicated hours for seniors and people with disabilities.</h4>
-            <% } %>
-            <h4>Latest wait time: <%= storeData.wait_time %> min</h4>
-            
+        <div class="data">
+            <h2 id="store">
+                <%= storeData.store_name %>, <%= storeData.store_city%>
+            </h2>
+
+            <div id="storeInfo">
+                <!--This div uses EJS syntax to display dynamic content-->
+                <% if(storeData.average_time !== null) { %>
+                    <p><b id="average">Average Wait Time:</b>
+                        <%= storeData.average_time%> min
+                    </p>
+                <% } %>
+                <!--Senior Hours information-->
+                <% if(storeData.senior_hour_note !== null) { %>
+                    <p><b id="senior">Hours for seniors / disabilities:</b></p>
+                    <p><%= storeData.senior_hour_note %></p>
+                <% } else { %>
+                    <p>Unfortunately, there is no known dedicated hours for seniors and people with disabilities.</p>
+                <% } %>
+                <!--Wait Time-->
+                <p id="latest">Latest wait time:
+                    <% if(storeData.wait_time !== null) { %>
+                        <b id="waitTime"><%= storeData.wait_time %> min</b>
+                    <% } else { %>
+                        <b id="waitTime">No updates yet</b>
+                    <% } %>
+                </p>
+                <!--When the wait time was last updated-->
+                <% if(storeData.last_updated !== null) { %>
+                    <p id="lastUpdated"></p>
+                    <input id="lastUpdatedHidden" style="display:none" value="<%= storeData.last_updated %>">
+                <% } else { %>
+                    <input id="lastUpdatedHidden" style="display:none" value="">
+                <% } %>
+            </div>
         </div>
 
-        <div id="map"></div>
+        <!--Redirect to update page-->
         <form action="/storepage.ejs" method="post">
-            <button type="submit" name="storeid" value="<%= storeData.id %>">Update time</button>
+            <button id="update" type="submit" name="storeid" value="<%= storeData.id %>">Update Time!</button>
         </form>
-        
-    </main>
-    <script>
 
-        //Added map to show where the store is
+        <!--The map will be generated into this div-->
+        <div id="map"></div>
+    </main>
+
+    <script id="LastUpdatedScript">
+        // Determines what is displayed in "lastUpdated" depending on the data provided from the NodeJS server.
+        let lastUpdated = $('#lastUpdatedHidden').val().split(":");
+        if (lastUpdated != "") {
+            let days = 0;
+            let hours = lastUpdated[0];
+            let minutes = lastUpdated[1];
+            let seconds = lastUpdated[2];
+            if (hours >= 24) {
+                days = Math.floor(hours / 24);
+                hours = hours - (days * 24);
+            }
+            let result = "";
+
+            // This block of code determines what displays depending on the value of lastUpdated.
+            if (days > 0) {
+                result = (days == 1) ? "Last Updated Yesterday" : `Last Updated ${days} days ago`;
+            } else if (hours > 0) {
+                result = (hours == 1) ? `Last Updated an hour ago` : `Last Updated ${hours} hours ago`;
+            } else if (minutes > 0) {
+                result = `Last Updated ${minutes} min ago`;
+            } else if (seconds > 0) {
+                result = `Last Updated Just Now`;
+            }
+            document.getElementById("lastUpdated").innerHTML = result;
+        }
+    </script>
+
+    <script id="LogoutScript">
+        // Adds functionality to the log out button.
+        // Code snippet found on youtube.com
+        // Author: Coding Cafe
+        // See: https://www.youtube.com/watch?v=mBh3HZaC_qo&list=PLxefhmF0pcPmK1c4qQS9wr9Zqdj0x_uLo&index=7
+        // Videotimestamp: 20:51
+        $("#logout").click(function() {
+            firebase.auth().signOut();
+            window.location.replace("/");
+        });
+    </script>
+
+    <script id="GenerateMap">
+        // Embed a map to show where the store is.
         let map = document.createElement('iframe');
         let mapHolder = document.getElementById('map');
         let key = "AIzaSyBMN5A6BZM022m3zZ35SsgwJWlTW3SGL4g"
 
-        $(document).ready( function() {
+        $(document).ready(function() {
             let store_name = $('#store').text();
             let address = $('#address').text();
             let search = `${store_name}, ${address}`
             if ('geolocation' in navigator) {
                 navigator.geolocation.getCurrentPosition(async position => {
-            
                     console.log(search)
-            
                     map.src = `https://www.google.com/maps/embed/v1/search?key=${key}&q=${search}&zoom=14`
                     mapHolder.appendChild(map);
                 });
             }
         })
+    </script>
+
+    <script>
+        // Determines the actions taken depending on if the user is logged in or signed out.
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                console.log(user.email);
+                document.getElementById("login-button").style.display = "none";
+                document.getElementById("signup-button").style.display = "none";
+            } else {
+                document.getElementById("update").type = "button";
+                document.getElementById("update").onclick = printLoginWindow;
+                console.log("you are not logged in");
+                document.getElementById("logout").style.display = "none";
+            }
+        });
     </script>
 </body>

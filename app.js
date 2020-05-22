@@ -16,7 +16,6 @@ firebase.initializeApp({
     measurementId: "G-9EVM86CMWZ"
 });
 require("firebase/auth");
-// require("firebase/firestore");
 
 const db = mysql.createPool({
     host: 'sql3.freemysqlhosting.net',
@@ -67,22 +66,27 @@ app.get("/storepage.ejs", (req, res) => {
 
 //-----Getting waittime from db-------//
 
-app.get("/waittime/:postalCode", async(req, res) => {
-    const placeId = req.params.postalCode.split(',');
-    const postalCode = placeId[0];
-
-    db.execute(`SELECT latest_wait_time_post_code('${postalCode}') as wait_time`).
+app.get("/waittime/:postalCode/:storeName/:phoneNum/:storeCity", async(req, res) => {
+    // const placeId = req.params.postalCode.split(',');
+    const postalCode = req.params.postalCode;
+    const phoneNum = req.params.phoneNum;
+    const storeName = req.params.storeName;
+    const storeCity = req.params.storeCity;
+    db.execute(`CALL store_info_create_if_doesnt_exist('${postalCode}', '${phoneNum}', '${storeName}', '${storeCity}')`).
     then(([Data, Metadata]) => {
-        let waitTime = Data[0]['wait_time'];
+        let waitTime = Data[0][0]['wait_time'];
+        let storeID = Data[0][0]['store_id']
 
-        if (waitTime != null) {
+        if (waitTime != null && storeID != null) {
             const data = {
-                waittime: waitTime
+                waittime: waitTime,
+                storeid: storeID
             }
             res.json(data);
         } else {
             const data = {
-                waittime: "N/A"
+                waittime: "N/A",
+                storeid: storeID
             }
             res.json(data);
         }
@@ -92,7 +96,6 @@ app.get("/waittime/:postalCode", async(req, res) => {
 
 app.get("/update.ejs", (req, res) => {
     let storeid = req.query.storeid;
-    console.log(storeid + "KLJHKJ");
     db.execute(`CALL get_store_info_with_id(${storeid})`).
     then(([Data, Metadata]) => {
         console.log(Data[0]);
@@ -102,16 +105,6 @@ app.get("/update.ejs", (req, res) => {
 });
 
 //------Posting-------//
-
-app.post("/marketlist.ejs", (req, res) => {
-    let input = req.body.storename;
-    db.execute(`CALL get_store_info('${input}')`).
-    then(([Data, Metadata]) => {
-        console.log(Data[0]);
-        res.render("pages/marketlist", { result: Data[0] });
-    }).
-    catch(error => console.log(error))
-})
 
 app.post("/storepage.ejs", (req, res) => {
     let storeid = req.body.storeid;

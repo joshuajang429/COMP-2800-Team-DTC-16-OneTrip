@@ -16,6 +16,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
 
+
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -34,7 +35,51 @@
 </head>
 
 <body>
-    <!-- NAVBAR -->
+    <!-- 
+        JavaScript SDK for FB share button and Twitter Tweet button
+    -->
+    <div id="fb-root"></div>
+    <script async defer>
+        /**
+         * Authors: Facebook Developers
+         * URL: https://developers.facebook.com/docs/plugins/share-button
+         */
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        /**
+         * Authors: Twitter Developers
+         * URL: https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview
+         */
+        window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+
+            return t;
+        }(document, "script", "twitter-wjs"));
+    </script>
+
+    <!-- 
+        Navbar codes and styling are all referenced from Bootstrap.
+        Authors: Bootstrap Team (team info at: https://github.com/orgs/twbs/people)
+        URL: https://getbootstrap.com/docs/4.0/components/navbar/
+    -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <a class="navbar-brand" href="#">
             <img src="assets/onetrip_logo_small.png" class="d-inline-block align-top" alt="" width="40px" height="40px">
@@ -60,10 +105,14 @@
         <div class="navbar-collapse collapse order-3 dual-collapse2" id="collapse_target">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" id="auth">
-                    <a class="nav-link" href="signIn.ejs">Log In</a>
+                    <a id="login-button" class="nav-link" href="signIn.ejs">Log In</a>
                 </li>
                 <li class="nav-item" id="auth">
-                    <a class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+                    <a id="signup-button" class="nav-link" href="signUp.ejs"><span class="glyphicon glyphicon-user"></span>Sign Up</a>
+                </li>
+                <li class="nav-item" id="auth">
+                    <!-- <a class="nav-link" href="/" id="logout"><span class="glyphicon glyphicon-user"></span>Log Out</a> -->
+                    <span class="nav-link" id="logout">Log Out</span>
                 </li>
             </ul>
         </div>
@@ -80,6 +129,14 @@
                     <a href="map.ejs">
                         <h1>Get Started!</h1>
                     </a>
+                    <!-- Share Buttons -->
+                    <div class="fb-share-button" data-href="https://onetrip.now.sh/" data-layout="button_count" data-size="large">
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fonetrip.now.sh%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                    </div>
+                    <div>
+                        <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20app&url=https://onetrip.now.sh/" data-size="large">Tweet</a>
+                    </div>
+
                 </div>
                 <div class="col-lg" style="text-align: center; margin: 50px auto">
                     <h2>Welcome to OneTrip,</h2>
@@ -178,11 +235,54 @@
         </div>
     </section>
     <script>
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+
+        $('#signup-btn').click(function() {
+            var email = $("#inputEmail").val();
+            var password = $("#inputPassword").val();
+            var confirmPassword = $("#inputConfirmPassword").val();
+            console.log("email: " + email + ", password: " + password);
+
+
+            if (password == confirmPassword) {
+                var result = firebase.auth().createUserWithEmailAndPassword(email, password);
+                result.catch(function(error) {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    console.log(errorCode);
+                    console.log(errorMessage);
+                })
+            } else {
+                window.alert("Passwords do not match");
+            }
+        });
+
+        $('#signin-btn').click(function() {
+            var email = $("#inputEmail").val();
+            var password = $("#inputPassword").val();
+            var result = firebase.auth().signInWithEmailAndPassword(email, password);
+            result.catch(function(error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorCode);
+                console.log(errorMessage);
+            })
+        });
+
+        $("#logout").click(function() {
+            firebase.auth().signOut();
+            window.location.replace("/");
+        });
+
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 console.log(user.email);
+                console.log(user.uid);
+                document.getElementById("login-button").style.display = "none";
+                document.getElementById("signup-button").style.display = "none";
             } else {
                 console.log("you are not logged in");
+                document.getElementById("logout").style.display = "none";
             }
         });
     </script>
