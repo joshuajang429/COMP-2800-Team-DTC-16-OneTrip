@@ -1,5 +1,0 @@
-THIS IS DEV BRANCH.
-
-1. Make sure all your feature branches branch out from the dev, not master.
-2. Make sure all your codes are tested before you merge your feature branch into dev.
-3. Make sure your feature branch has the latest updates from dev before merging.
